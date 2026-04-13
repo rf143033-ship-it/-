@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الإحصاءات الاقتصادية - منصة المدن الصناعية</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="animations.css">
+  <link rel="stylesheet" href="responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    .chart-card { background: var(--white); border-radius: var(--radius-lg); padding: 32px; border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
+    .chart-card h3 { font-size: 1.05rem; color: var(--primary); margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
+    .chart-card h3 i { color: var(--gold); }
+    .chart-container { position: relative; height: 300px; }
+    .data-table { width: 100%; border-collapse: collapse; }
+    .data-table th { background: var(--primary); color: white; padding: 12px 16px; text-align: right; font-size: 0.88rem; font-weight: 700; }
+    .data-table td { padding: 12px 16px; border-bottom: 1px solid var(--border); font-size: 0.88rem; color: var(--text-medium); }
+    .data-table tr:hover td { background: rgba(212,175,55,0.04); }
+    .data-table tr:last-child td { border-bottom: none; }
+    .kpi-card { background: var(--white); border-radius: var(--radius-lg); padding: 28px; border: 1px solid var(--border); display: flex; align-items: center; gap: 20px; transition: var(--transition); }
+    .kpi-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: rgba(212,175,55,0.3); }
+    .kpi-icon { width: 60px; height: 60px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .kpi-icon i { font-size: 1.5rem; color: white; }
+    .kpi-val { font-size: 1.8rem; font-weight: 900; color: var(--gold); }
+    .kpi-label { font-size: 0.82rem; color: var(--text-light); }
+    .kpi-change { font-size: 0.78rem; font-weight: 700; margin-top: 4px; }
+    .kpi-change.up { color: #27ae60; }
+    .kpi-change.down { color: #e74c3c; }
+  </style>
+</head>
+<body>
+
+<div id="pageLoader" class="page-loader"><div class="loader-inner"><div class="loader-logo"><i class="fas fa-chart-bar"></i></div><div class="loader-bar"><div class="loader-bar-fill"></div></div><p class="loader-text">الإحصاءات الاقتصادية</p></div></div>
+
+<header class="site-header" id="siteHeader">
+  <div class="container">
+    <div class="header-inner">
+      <a href="index.html" class="site-logo">
+        <div class="logo-icon"><i class="fas fa-industry"></i></div>
+        <div class="logo-text">
+          <span class="title">منصة المدن الصناعية</span>
+          <span class="subtitle">المملكة العربية السعودية</span>
+        </div>
+      </a>
+      <nav class="main-nav" id="mainNav">
+        <div class="nav-item">
+          <a href="index.html" class="nav-link"><i class="fas fa-home"></i> الرئيسية</a>
+        </div>
+        <div class="nav-item">
+          <a href="industrial-cities.html" class="nav-link"><i class="fas fa-city"></i> المدن الصناعية <i class="fas fa-chevron-down" style="font-size:0.7rem"></i></a>
+          <div class="dropdown-menu">
+            <a href="industrial-cities.html" class="dropdown-item"><i class="fas fa-list"></i> جميع المدن</a>
+            <a href="explore-cities.html" class="dropdown-item"><i class="fas fa-search"></i> استكشاف المدن</a>
+            <a href="compare-cities.html" class="dropdown-item"><i class="fas fa-balance-scale"></i> مقارنة المدن</a>
+            <a href="find-your-city.html" class="dropdown-item"><i class="fas fa-map-pin"></i> ابحث عن مدينتك</a>
+            <a href="industrial-map.html" class="dropdown-item"><i class="fas fa-map"></i> الخريطة التفاعلية</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="industries.html" class="nav-link"><i class="fas fa-cogs"></i> الصناعات <i class="fas fa-chevron-down" style="font-size:0.7rem"></i></a>
+          <div class="dropdown-menu">
+            <a href="industries.html" class="dropdown-item"><i class="fas fa-industry"></i> قطاعات الصناعة</a>
+            <a href="investment-opportunities.html" class="dropdown-item"><i class="fas fa-chart-line"></i> فرص الاستثمار</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="vision-2030.html" class="nav-link"><i class="fas fa-star"></i> رؤية 2030</a>
+        </div>
+        <div class="nav-item">
+          <a href="economic-statistics.html" class="nav-link active"><i class="fas fa-chart-bar"></i> الإحصاءات <i class="fas fa-chevron-down" style="font-size:0.7rem"></i></a>
+          <div class="dropdown-menu">
+            <a href="economic-statistics.html" class="dropdown-item"><i class="fas fa-chart-pie"></i> الإحصاءات الاقتصادية</a>
+            <a href="industrial-timeline.html" class="dropdown-item"><i class="fas fa-history"></i> الجدول الزمني</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="about-platform.html" class="nav-link"><i class="fas fa-info-circle"></i> عن المنصة</a>
+        </div>
+      </nav>
+      <div class="header-actions">
+        <button class="btn-search" id="searchBtn" aria-label="بحث"><i class="fas fa-search"></i></button>
+        <a href="contact.html" class="btn-cta">تواصل معنا</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="القائمة" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div id="searchOverlay"><div class="search-overlay-inner"><div class="search-overlay-bar"><input type="text" id="globalSearchInput" placeholder="ابحث..."><button id="searchClose"><i class="fas fa-times"></i></button></div><div id="searchResults"></div></div></div>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-content">
+      <div class="breadcrumb"><a href="index.html" class="breadcrumb-item">الرئيسية</a><span class="breadcrumb-separator"><i class="fas fa-chevron-left"></i></span><span class="breadcrumb-item">الإحصاءات الاقتصادية</span></div>
+      <h1 class="page-hero-title">الإحصاءات الاقتصادية</h1>
+      <p class="page-hero-subtitle">بيانات ومؤشرات اقتصادية شاملة تعكس أداء القطاع الصناعي السعودي</p>
+    </div>
+  </div>
+</section>
+
+<section class="section-sm" style="background:var(--off-white)">
+  <div class="container">
+    <div class="grid-4">
+      <div class="kpi-card reveal">
+        <div class="kpi-icon" style="background:linear-gradient(135deg,#2C3E50,#34495E)"><i class="fas fa-chart-pie"></i></div>
+        <div><div class="kpi-val">12.5%</div><div class="kpi-label">مساهمة الصناعة في الناتج المحلي</div><div class="kpi-change up"><i class="fas fa-arrow-up"></i> +1.2% عن العام الماضي</div></div>
+      </div>
+      <div class="kpi-card reveal delay-100">
+        <div class="kpi-icon" style="background:linear-gradient(135deg,#D4AF37,#C9A961)"><i class="fas fa-ship"></i></div>
+        <div><div class="kpi-val">285 مليار</div><div class="kpi-label">الصادرات غير النفطية (ريال)</div><div class="kpi-change up"><i class="fas fa-arrow-up"></i> +15% عن العام الماضي</div></div>
+      </div>
+      <div class="kpi-card reveal delay-200">
+        <div class="kpi-icon" style="background:linear-gradient(135deg,#C9A961,#D4AF37)"><i class="fas fa-users"></i></div>
+        <div><div class="kpi-val">850K</div><div class="kpi-label">إجمالي العمالة الصناعية</div><div class="kpi-change up"><i class="fas fa-arrow-up"></i> +8% عن العام الماضي</div></div>
+      </div>
+      <div class="kpi-card reveal delay-300">
+        <div class="kpi-icon" style="background:linear-gradient(135deg,#34495E,#2C3E50)"><i class="fas fa-globe"></i></div>
+        <div><div class="kpi-val">145 مليار</div><div class="kpi-label">الاستثمار الأجنبي المباشر (ريال)</div><div class="kpi-change up"><i class="fas fa-arrow-up"></i> +22% عن العام الماضي</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-badge"><i class="fas fa-chart-bar"></i> الرسوم البيانية</div>
+      <h2 class="section-title">تحليل البيانات الاقتصادية</h2>
+      <div class="title-line"></div>
+    </div>
+    <div class="grid-2" style="gap:32px;margin-bottom:32px">
+      <div class="chart-card reveal">
+        <h3><i class="fas fa-chart-line"></i> نمو الناتج الصناعي (2019-2025)</h3>
+        <div class="chart-container"><canvas id="gdpChart"></canvas></div>
+      </div>
+      <div class="chart-card reveal delay-100">
+        <h3><i class="fas fa-chart-pie"></i> توزيع القطاعات الصناعية</h3>
+        <div class="chart-container"><canvas id="sectorsChart"></canvas></div>
+      </div>
+    </div>
+    <div class="grid-2" style="gap:32px">
+      <div class="chart-card reveal">
+        <h3><i class="fas fa-chart-bar"></i> الصادرات غير النفطية (مليار ريال)</h3>
+        <div class="chart-container"><canvas id="exportsChart"></canvas></div>
+      </div>
+      <div class="chart-card reveal delay-100">
+        <h3><i class="fas fa-chart-area"></i> نمو الاستثمار الأجنبي</h3>
+        <div class="chart-container"><canvas id="investmentChart"></canvas></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--light-bg)">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-badge"><i class="fas fa-table"></i> إحصاءات المدن</div>
+      <h2 class="section-title">إحصاءات المدن الصناعية</h2>
+      <div class="title-line"></div>
+    </div>
+    <div class="chart-card" style="overflow-x:auto">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>المدينة الصناعية</th>
+            <th>المنطقة</th>
+            <th>عدد المنشآت</th>
+            <th>عدد العمال</th>
+            <th>الإنتاج السنوي</th>
+            <th>نسبة التصدير</th>
+            <th>مساهمة الناتج</th>
+          </tr>
+        </thead>
+        <tbody id="citiesStatsTable">
+          <tr><td>مدينة الجبيل الصناعية</td><td>المنطقة الشرقية</td><td>2,500+</td><td>250,000+</td><td>350 مليار ريال</td><td>85%</td><td>4.2%</td></tr>
+          <tr><td>مدينة ينبع الصناعية</td><td>منطقة المدينة المنورة</td><td>1,200+</td><td>120,000+</td><td>180 مليار ريال</td><td>75%</td><td>2.1%</td></tr>
+          <tr><td>المدينة الصناعية - جدة</td><td>منطقة مكة المكرمة</td><td>1,800+</td><td>150,000+</td><td>95 مليار ريال</td><td>45%</td><td>1.8%</td></tr>
+          <tr><td>المدينة الصناعية - الرياض</td><td>منطقة الرياض</td><td>2,100+</td><td>180,000+</td><td>85 مليار ريال</td><td>35%</td><td>1.5%</td></tr>
+          <tr><td>المدينة الصناعية - الدمام</td><td>المنطقة الشرقية</td><td>850+</td><td>75,000+</td><td>60 مليار ريال</td><td>55%</td><td>0.9%</td></tr>
+          <tr><td>مدينة السدير الصناعية</td><td>منطقة الرياض</td><td>450+</td><td>40,000+</td><td>25 مليار ريال</td><td>30%</td><td>0.5%</td></tr>
+          <tr><td>المدينة الصناعية - جازان</td><td>منطقة جازان</td><td>380+</td><td>35,000+</td><td>45 مليار ريال</td><td>60%</td><td>0.6%</td></tr>
+          <tr><td>المدينة الصناعية - حائل</td><td>منطقة حائل</td><td>220+</td><td>18,000+</td><td>12 مليار ريال</td><td>25%</td><td>0.2%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section-sm" style="background:var(--white)">
+  <div class="container">
+    <div class="grid-3" style="gap:24px">
+      <a href="economic-details.html?section=gdp" class="card hover-lift" style="padding:28px;text-align:center;display:block">
+        <div style="width:60px;height:60px;background:linear-gradient(135deg,#2C3E50,#34495E);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;margin:0 auto 16px"><i class="fas fa-chart-pie" style="color:white;font-size:1.4rem"></i></div>
+        <h4 style="color:var(--primary);margin-bottom:8px">تفاصيل الناتج المحلي</h4>
+        <p style="font-size:0.85rem;color:var(--text-light)">تحليل مفصل لمساهمة الصناعة في الناتج المحلي</p>
+      </a>
+      <a href="economic-details.html?section=exports" class="card hover-lift" style="padding:28px;text-align:center;display:block">
+        <div style="width:60px;height:60px;background:linear-gradient(135deg,#D4AF37,#C9A961);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;margin:0 auto 16px"><i class="fas fa-ship" style="color:white;font-size:1.4rem"></i></div>
+        <h4 style="color:var(--primary);margin-bottom:8px">تفاصيل الصادرات</h4>
+        <p style="font-size:0.85rem;color:var(--text-light)">تحليل مفصل للصادرات غير النفطية</p>
+      </a>
+      <a href="economic-details.html?section=investment" class="card hover-lift" style="padding:28px;text-align:center;display:block">
+        <div style="width:60px;height:60px;background:linear-gradient(135deg,#C9A961,#D4AF37);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;margin:0 auto 16px"><i class="fas fa-globe" style="color:white;font-size:1.4rem"></i></div>
+        <h4 style="color:var(--primary);margin-bottom:8px">تفاصيل الاستثمار</h4>
+        <p style="font-size:0.85rem;color:var(--text-light)">تحليل مفصل للاستثمار الأجنبي المباشر</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="site-logo">
+          <div class="logo-icon"><i class="fas fa-industry"></i></div>
+          <div class="logo-text">
+            <span class="title">منصة المدن الصناعية</span>
+            <span class="subtitle">المملكة العربية السعودية</span>
+          </div>
+        </a>
+        <p class="footer-desc">منصة متكاملة تجمع المعلومات والبيانات عن المدن الصناعية في المملكة العربية السعودية، وتدعم المستثمرين في اتخاذ قراراتهم الاستثمارية.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-youtube"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>المدن الصناعية</h4>
+        <div class="footer-links">
+          <a href="industrial-cities.html" class="footer-link"><i class="fas fa-chevron-left"></i> جميع المدن</a>
+          <a href="city-details.html?id=jubail" class="footer-link"><i class="fas fa-chevron-left"></i> الجبيل الصناعية</a>
+          <a href="city-details.html?id=yanbu" class="footer-link"><i class="fas fa-chevron-left"></i> ينبع الصناعية</a>
+          <a href="city-details.html?id=jeddah" class="footer-link"><i class="fas fa-chevron-left"></i> جدة الصناعية</a>
+          <a href="city-details.html?id=riyadh" class="footer-link"><i class="fas fa-chevron-left"></i> الرياض الصناعية</a>
+          <a href="industrial-map.html" class="footer-link"><i class="fas fa-chevron-left"></i> الخريطة التفاعلية</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>الاستثمار</h4>
+        <div class="footer-links">
+          <a href="investment-opportunities.html" class="footer-link"><i class="fas fa-chevron-left"></i> فرص الاستثمار</a>
+          <a href="industries.html" class="footer-link"><i class="fas fa-chevron-left"></i> القطاعات الصناعية</a>
+          <a href="vision-2030.html" class="footer-link"><i class="fas fa-chevron-left"></i> رؤية 2030</a>
+          <a href="economic-statistics.html" class="footer-link"><i class="fas fa-chevron-left"></i> الإحصاءات</a>
+          <a href="find-your-city.html" class="footer-link"><i class="fas fa-chevron-left"></i> ابحث عن مدينتك</a>
+          <a href="compare-cities.html" class="footer-link"><i class="fas fa-chevron-left"></i> مقارنة المدن</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>المنصة</h4>
+        <div class="footer-links">
+          <a href="about-platform.html" class="footer-link"><i class="fas fa-chevron-left"></i> عن المنصة</a>
+          <a href="industrial-timeline.html" class="footer-link"><i class="fas fa-chevron-left"></i> الجدول الزمني</a>
+          <a href="contact.html" class="footer-link"><i class="fas fa-chevron-left"></i> تواصل معنا</a>
+        </div>
+        <div style="margin-top:24px;padding:16px;background:rgba(212,175,55,0.1);border-radius:10px;border:1px solid rgba(212,175,55,0.2)">
+          <div style="color:var(--gold);font-weight:700;margin-bottom:8px;font-size:0.9rem"><i class="fas fa-phone-alt"></i> للاستفسار</div>
+          <div style="color:rgba(255,255,255,0.7);font-size:0.85rem">920000000</div>
+          <div style="color:rgba(255,255,255,0.7);font-size:0.85rem;margin-top:4px">info@industrial-sa.gov.sa</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>جميع الحقوق محفوظة 2026 - منصة المدن الصناعية في المملكة العربية السعودية</p>
+      <div class="footer-bottom-links">
+        <a href="#">سياسة الخصوصية</a>
+        <a href="#">شروط الاستخدام</a>
+        <a href="#">إخلاء المسؤولية</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></button>
+<script src="cities.js"></script>
+<script src="main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const chartDefaults = {
+    font: { family: 'Tajawal, sans-serif' },
+    color: '#666'
+  };
+  Chart.defaults.font.family = 'Tajawal, sans-serif';
+  Chart.defaults.color = '#666';
+
+  const goldColor = '#D4AF37';
+  const darkColor = '#2C3E50';
+  const goldLight = 'rgba(212,175,55,0.15)';
+
+  new Chart(document.getElementById('gdpChart'), {
+    type: 'line',
+    data: {
+      labels: ['2019', '2020', '2021', '2022', '2023', '2024', '2025'],
+      datasets: [{
+        label: 'الناتج الصناعي (مليار ريال)',
+        data: [580, 520, 610, 720, 810, 890, 960],
+        borderColor: goldColor,
+        backgroundColor: goldLight,
+        borderWidth: 3,
+        fill: true,
+        tension: 0.4,
+        pointBackgroundColor: goldColor,
+        pointRadius: 5
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { grid: { color: 'rgba(0,0,0,0.05)' }, ticks: { callback: v => v + ' مليار' } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+
+  new Chart(document.getElementById('sectorsChart'), {
+    type: 'doughnut',
+    data: {
+      labels: ['البتروكيماويات', 'الغذائية', 'الحديد والصلب', 'الدوائية', 'مواد البناء', 'اللوجستيات', 'أخرى'],
+      datasets: [{
+        data: [35, 18, 12, 8, 10, 7, 10],
+        backgroundColor: ['#2C3E50', '#D4AF37', '#34495E', '#C9A961', '#666', '#888', '#aaa'],
+        borderWidth: 3,
+        borderColor: '#fff'
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { position: 'right' } }
+    }
+  });
+
+  new Chart(document.getElementById('exportsChart'), {
+    type: 'bar',
+    data: {
+      labels: ['2019', '2020', '2021', '2022', '2023', '2024', '2025'],
+      datasets: [{
+        label: 'الصادرات (مليار ريال)',
+        data: [180, 155, 195, 230, 255, 270, 285],
+        backgroundColor: goldColor,
+        borderRadius: 6,
+        borderSkipped: false
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { grid: { color: 'rgba(0,0,0,0.05)' }, ticks: { callback: v => v + ' مليار' } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+
+  new Chart(document.getElementById('investmentChart'), {
+    type: 'line',
+    data: {
+      labels: ['2019', '2020', '2021', '2022', '2023', '2024', '2025'],
+      datasets: [{
+        label: 'الاستثمار الأجنبي (مليار ريال)',
+        data: [75, 65, 85, 100, 118, 132, 145],
+        borderColor: darkColor,
+        backgroundColor: 'rgba(44,62,80,0.1)',
+        borderWidth: 3,
+        fill: true,
+        tension: 0.4,
+        pointBackgroundColor: darkColor,
+        pointRadius: 5
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { grid: { color: 'rgba(0,0,0,0.05)' }, ticks: { callback: v => v + ' مليار' } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+});
+</script>
+</body>
+</html>

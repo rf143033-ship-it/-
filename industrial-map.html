@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الخريطة التفاعلية - منصة المدن الصناعية</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="animations.css">
+  <link rel="stylesheet" href="responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <style>
+    body { overflow-x: hidden; }
+    .map-page { padding-top: var(--header-height); min-height: 100vh; display: flex; flex-direction: column; }
+    .map-controls { background: var(--white); border-bottom: 1px solid var(--border); padding: 16px 0; position: sticky; top: var(--header-height); z-index: 100; box-shadow: var(--shadow-sm); }
+    .map-controls-inner { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .map-layout { display: flex; flex: 1; min-height: calc(100vh - var(--header-height) - 70px); }
+    #map { flex: 1; min-height: 600px; z-index: 1; }
+    .map-sidebar { width: 380px; flex-shrink: 0; background: var(--white); border-right: 1px solid var(--border); overflow-y: auto; display: flex; flex-direction: column; }
+    .map-sidebar-header { padding: 24px; border-bottom: 1px solid var(--border); background: var(--primary); }
+    .map-sidebar-header h3 { color: var(--white); font-size: 1.1rem; margin-bottom: 4px; }
+    .map-sidebar-header p { color: rgba(255,255,255,0.65); font-size: 0.85rem; }
+    .city-list-item { padding: 16px 20px; border-bottom: 1px solid var(--border); cursor: pointer; transition: var(--transition); display: flex; align-items: center; gap: 14px; }
+    .city-list-item:hover, .city-list-item.active { background: rgba(212,175,55,0.06); border-right: 3px solid var(--gold); }
+    .city-list-item .city-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+    .city-list-item .city-info h4 { font-size: 0.9rem; color: var(--primary); margin-bottom: 2px; }
+    .city-list-item .city-info p { font-size: 0.78rem; color: var(--text-light); }
+    .city-list-item .city-factories { font-size: 0.78rem; color: var(--gold); font-weight: 700; margin-right: auto; flex-shrink: 0; }
+    .city-popup-card { background: var(--white); border-radius: var(--radius-md); overflow: hidden; min-width: 280px; max-width: 320px; box-shadow: var(--shadow-lg); }
+    .city-popup-img { height: 140px; overflow: hidden; }
+    .city-popup-img img { width: 100%; height: 100%; object-fit: cover; }
+    .city-popup-body { padding: 16px; }
+    .city-popup-body h3 { font-size: 1rem; color: var(--primary); margin-bottom: 6px; }
+    .city-popup-body .region { font-size: 0.78rem; color: var(--gold); font-weight: 600; margin-bottom: 10px; }
+    .city-popup-stats { display: flex; gap: 12px; margin-bottom: 12px; }
+    .city-popup-stat { flex: 1; text-align: center; background: var(--off-white); border-radius: 6px; padding: 8px; }
+    .city-popup-stat .val { font-size: 0.9rem; font-weight: 800; color: var(--primary); }
+    .city-popup-stat .lbl { font-size: 0.7rem; color: var(--text-light); }
+    .city-popup-industries { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 12px; }
+    .city-popup-tag { padding: 3px 10px; background: rgba(212,175,55,0.1); color: var(--gold); border-radius: 100px; font-size: 0.72rem; font-weight: 600; }
+    .city-popup-btn { display: block; padding: 10px; background: var(--primary); color: var(--white); text-align: center; border-radius: 6px; font-size: 0.85rem; font-weight: 700; transition: var(--transition); }
+    .city-popup-btn:hover { background: var(--gold); }
+    .leaflet-popup-content-wrapper { padding: 0 !important; border-radius: var(--radius-md) !important; overflow: hidden; box-shadow: var(--shadow-lg) !important; }
+    .leaflet-popup-content { margin: 0 !important; }
+    .leaflet-popup-tip-container { display: none; }
+    .map-legend { position: absolute; bottom: 32px; left: 32px; background: var(--white); border-radius: var(--radius-md); padding: 16px 20px; box-shadow: var(--shadow-md); z-index: 500; border: 1px solid var(--border); min-width: 180px; }
+    .map-legend h4 { font-size: 0.85rem; color: var(--primary); margin-bottom: 12px; font-weight: 700; }
+    .legend-item { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-size: 0.82rem; color: var(--text-medium); }
+    .legend-dot { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; }
+    .custom-marker { width: 36px; height: 36px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.3); border: 3px solid white; cursor: pointer; transition: all 0.3s; }
+    .custom-marker:hover { transform: rotate(-45deg) scale(1.2); }
+    .custom-marker i { transform: rotate(45deg); color: white; font-size: 0.9rem; }
+    @media (max-width: 991px) { .map-layout { flex-direction: column; } .map-sidebar { width: 100%; max-height: 300px; border-right: none; border-top: 1px solid var(--border); } #map { min-height: 400px; } }
+  </style>
+</head>
+<body>
+
+<div id="pageLoader" class="page-loader">
+  <div class="loader-inner">
+    <div class="loader-logo"><i class="fas fa-map"></i></div>
+    <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+    <p class="loader-text">الخريطة التفاعلية</p>
+  </div>
+</div>
+
+<header class="site-header" id="siteHeader">
+  <div class="container">
+    <div class="header-inner">
+      <a href="index.html" class="site-logo">
+        <div class="logo-icon"><i class="fas fa-industry"></i></div>
+        <div class="logo-text">
+          <span class="title">منصة المدن الصناعية</span>
+          <span class="subtitle">المملكة العربية السعودية</span>
+        </div>
+      </a>
+      <nav class="main-nav" id="mainNav">
+        <div class="nav-item">
+          <a href="index.html" class="nav-link"><i class="fas fa-home"></i> الرئيسية</a>
+        </div>
+        <div class="nav-item">
+          <a href="industrial-cities.html" class="nav-link active"><i class="fas fa-city"></i> المدن الصناعية <i class="fas fa-chevron-down" style="font-size:0.7rem"></i></a>
+          <div class="dropdown-menu">
+            <a href="industrial-cities.html" class="dropdown-item"><i class="fas fa-list"></i> جميع المدن</a>
+            <a href="explore-cities.html" class="dropdown-item"><i class="fas fa-search"></i> استكشاف المدن</a>
+            <a href="compare-cities.html" class="dropdown-item"><i class="fas fa-balance-scale"></i> مقارنة المدن</a>
+            <a href="find-your-city.html" class="dropdown-item"><i class="fas fa-map-pin"></i> ابحث عن مدينتك</a>
+            <a href="industrial-map.html" class="dropdown-item"><i class="fas fa-map"></i> الخريطة التفاعلية</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="industries.html" class="nav-link"><i class="fas fa-cogs"></i> الصناعات <i class="fas fa-chevron-down" style="font-size:0.7rem"></i></a>
+          <div class="dropdown-menu">
+            <a href="industries.html" class="dropdown-item"><i class="fas fa-industry"></i> قطاعات الصناعة</a>
+            <a href="investment-opportunities.html" class="dropdown-item"><i class="fas fa-chart-line"></i> فرص الاستثمار</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="vision-2030.html" class="nav-link"><i class="fas fa-star"></i> رؤية 2030</a>
+        </div>
+        <div class="nav-item">
+          <a href="economic-statistics.html" class="nav-link"><i class="fas fa-chart-bar"></i> الإحصاءات <i class="fas fa-chevron-down" style="font-size:0.7rem"></i></a>
+          <div class="dropdown-menu">
+            <a href="economic-statistics.html" class="dropdown-item"><i class="fas fa-chart-pie"></i> الإحصاءات الاقتصادية</a>
+            <a href="industrial-timeline.html" class="dropdown-item"><i class="fas fa-history"></i> الجدول الزمني</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="about-platform.html" class="nav-link"><i class="fas fa-info-circle"></i> عن المنصة</a>
+        </div>
+      </nav>
+      <div class="header-actions">
+        <button class="btn-search" id="searchBtn" aria-label="بحث"><i class="fas fa-search"></i></button>
+        <a href="contact.html" class="btn-cta">تواصل معنا</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="القائمة" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div id="searchOverlay"><div class="search-overlay-inner"><div class="search-overlay-bar"><input type="text" id="globalSearchInput" placeholder="ابحث..."><button id="searchClose"><i class="fas fa-times"></i></button></div><div id="searchResults"></div></div></div>
+
+
+<div class="map-page">
+  
+  <div class="map-controls">
+    <div class="container">
+      <div class="map-controls-inner">
+        <div style="font-weight:800;color:var(--primary);font-size:1rem;display:flex;align-items:center;gap:8px">
+          <i class="fas fa-map-marked-alt" style="color:var(--gold)"></i>
+          الخريطة التفاعلية
+        </div>
+        <div class="filter-chips" id="mapFilters">
+          <span class="chip active" data-filter="all">جميع المدن</span>
+          <span class="chip" data-filter="petrochemicals">البتروكيماويات</span>
+          <span class="chip" data-filter="food">الصناعات الغذائية</span>
+          <span class="chip" data-filter="steel">الحديد والصلب</span>
+          <span class="chip" data-filter="logistics">اللوجستيات</span>
+        </div>
+        <div style="margin-right:auto;display:flex;align-items:center;gap:8px;font-size:0.85rem;color:var(--text-light)">
+          <i class="fas fa-map-pin" style="color:var(--gold)"></i>
+          <span id="mapCitiesCount">10</span> مدينة على الخريطة
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="map-layout">
+    
+    <div id="map"></div>
+
+    
+    <div class="map-sidebar">
+      <div class="map-sidebar-header">
+        <h3><i class="fas fa-list" style="margin-left:8px"></i> قائمة المدن الصناعية</h3>
+        <p>اضغط على أي مدينة لعرض موقعها على الخريطة</p>
+      </div>
+      <div id="citySidebarList"></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="cities.js"></script>
+<script src="main.js"></script>
+<script src="map.js"></script>
+</body>
+</html>

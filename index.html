@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="منصة المدن الصناعية في المملكة العربية السعودية - بوابتك للاستثمار الصناعي ورؤية 2030">
+  <title>منصة المدن الصناعية - المملكة العربية السعودية</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="animations.css">
+  <link rel="stylesheet" href="responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    .features-section { padding: 100px 0; background: var(--light-bg); }
+    .feature-box { background: var(--white); border-radius: var(--radius-lg); padding: 36px 28px; text-align: center; border: 1px solid var(--border); transition: var(--transition); position: relative; overflow: hidden; }
+    .feature-box::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--gold), var(--gold-light)); transform: scaleX(0); transition: var(--transition); }
+    .feature-box:hover::before { transform: scaleX(1); }
+    .feature-box:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+    .feature-box .icon { width: 72px; height: 72px; background: linear-gradient(135deg, rgba(212,175,55,0.12), rgba(201,169,97,0.08)); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+    .feature-box .icon i { font-size: 1.8rem; color: var(--gold); }
+    .feature-box h3 { font-size: 1.1rem; color: var(--primary); margin-bottom: 12px; }
+    .feature-box p { font-size: 0.88rem; color: var(--text-light); line-height: 1.7; }
+    .cities-showcase { padding: 100px 0; background: var(--white); }
+    .showcase-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 280px 280px; gap: 20px; }
+    .showcase-item { border-radius: var(--radius-lg); overflow: hidden; position: relative; cursor: pointer; }
+    .showcase-item:first-child { grid-row: span 2; }
+    .showcase-item img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition-slow); }
+    .showcase-item:hover img { transform: scale(1.08); }
+    .showcase-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(44,62,80,0.9) 0%, transparent 60%); display: flex; flex-direction: column; justify-content: flex-end; padding: 24px; }
+    .showcase-overlay h3 { color: var(--white); font-size: 1.1rem; margin-bottom: 4px; }
+    .showcase-overlay p { color: rgba(255,255,255,0.75); font-size: 0.82rem; }
+    .vision-section { padding: 100px 0; background: var(--primary); position: relative; overflow: hidden; }
+    .vision-section::before { content: ''; position: absolute; top: -100px; right: -100px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 70%); border-radius: 50%; }
+    .vision-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-lg); padding: 32px; transition: var(--transition); }
+    .vision-card:hover { background: rgba(255,255,255,0.1); border-color: rgba(212,175,55,0.4); transform: translateY(-4px); }
+    .vision-card .icon { width: 56px; height: 56px; background: rgba(212,175,55,0.15); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+    .vision-card .icon i { color: var(--gold); font-size: 1.4rem; }
+    .vision-card h4 { color: var(--white); font-size: 1rem; margin-bottom: 8px; }
+    .vision-card p { color: rgba(255,255,255,0.65); font-size: 0.88rem; line-height: 1.7; }
+    .industries-preview { padding: 100px 0; background: var(--off-white); }
+    .industry-pill { display: flex; align-items: center; gap: 16px; background: var(--white); border-radius: var(--radius-md); padding: 20px 24px; border: 1px solid var(--border); transition: var(--transition); cursor: pointer; }
+    .industry-pill:hover { border-color: var(--gold); box-shadow: var(--shadow-md); transform: translateX(-4px); }
+    .industry-pill .icon { width: 48px; height: 48px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .industry-pill .icon i { font-size: 1.3rem; color: var(--white); }
+    .industry-pill h4 { font-size: 0.95rem; color: var(--primary); margin-bottom: 2px; }
+    .industry-pill p { font-size: 0.8rem; color: var(--text-light); }
+    .industry-pill .arrow { margin-right: auto; color: var(--gold); opacity: 0; transition: var(--transition); }
+    .industry-pill:hover .arrow { opacity: 1; }
+    .cta-section { padding: 100px 0; background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%); position: relative; overflow: hidden; }
+    .cta-section::before { content: ''; position: absolute; top: -50%; right: -10%; width: 400px; height: 400px; background: rgba(255,255,255,0.1); border-radius: 50%; }
+    .cta-section::after { content: ''; position: absolute; bottom: -30%; left: -5%; width: 300px; height: 300px; background: rgba(255,255,255,0.08); border-radius: 50%; }
+    .news-section { padding: 100px 0; background: var(--white); }
+    .news-card { background: var(--white); border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border); transition: var(--transition); }
+    .news-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+    .news-card-img { height: 200px; overflow: hidden; }
+    .news-card-img img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition-slow); }
+    .news-card:hover .news-card-img img { transform: scale(1.08); }
+    .news-card-body { padding: 24px; }
+    .news-date { font-size: 0.78rem; color: var(--gold); font-weight: 600; margin-bottom: 8px; }
+    .news-title { font-size: 1rem; font-weight: 700; color: var(--primary); margin-bottom: 10px; line-height: 1.4; }
+    .news-excerpt { font-size: 0.85rem; color: var(--text-light); line-height: 1.7; }
+    .partners-section { padding: 80px 0; background: var(--light-bg); }
+    .partner-logo { background: var(--white); border-radius: var(--radius-md); padding: 24px 32px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border); transition: var(--transition); min-height: 80px; }
+    .partner-logo:hover { border-color: var(--gold); box-shadow: var(--shadow-sm); }
+    .partner-logo span { font-size: 0.9rem; font-weight: 700; color: var(--primary); text-align: center; }
+    .map-preview-section { padding: 100px 0; background: var(--primary); }
+    .map-preview-img { border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-lg); position: relative; }
+    .map-preview-img img { width: 100%; height: 400px; object-fit: cover; }
+    .map-preview-overlay { position: absolute; inset: 0; background: rgba(44,62,80,0.5); display: flex; align-items: center; justify-content: center; }
+    .map-preview-btn { padding: 16px 36px; background: var(--gold); color: var(--white); border-radius: var(--radius-sm); font-size: 1.1rem; font-weight: 700; display: flex; align-items: center; gap: 12px; transition: var(--transition); }
+    .map-preview-btn:hover { background: var(--white); color: var(--gold); transform: scale(1.05); }
+  </style>
+</head>
+<body>
+
+
+<div id="pageLoader" class="page-loader">
+  <div class="loader-inner">
+    <div class="loader-logo"><i class="fas fa-industry"></i></div>
+    <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+    <p class="loader-text">منصة المدن الصناعية</p>
+  </div>
+</div>
+
+
+<header class="site-header" id="siteHeader">
+  <div class="container">
+    <div class="header-inner">
+      <a href="index.html" class="site-logo">
+        <div class="logo-icon"><i class="fas fa-industry"></i></div>
+        <div class="logo-text">
+          <span class="title">منصة المدن الصناعية</span>
+          <span class="subtitle">المملكة العربية السعودية</span>
+        </div>
+      </a>
+      <nav class="main-nav" id="mainNav">
+        <div class="nav-item">
+          <a href="index.html" class="nav-link"><i class="fas fa-home"></i> الرئيسية</a>
+        </div>
+        <div class="nav-item">
+          <a href="industrial-cities.html" class="nav-link"><i class="fas fa-city"></i> المدن الصناعية <i class="fas fa-chevron-down" style="font-size:0.7rem"></i></a>
+          <div class="dropdown-menu">
+            <a href="industrial-cities.html" class="dropdown-item"><i class="fas fa-list"></i> جميع المدن</a>
+            <a href="explore-cities.html" class="dropdown-item"><i class="fas fa-search"></i> استكشاف المدن</a>
+            <a href="compare-cities.html" class="dropdown-item"><i class="fas fa-balance-scale"></i> مقارنة المدن</a>
+            <a href="find-your-city.html" class="dropdown-item"><i class="fas fa-map-pin"></i> ابحث عن مدينتك</a>
+            <a href="industrial-map.html" class="dropdown-item"><i class="fas fa-map"></i> الخريطة التفاعلية</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="industries.html" class="nav-link"><i class="fas fa-cogs"></i> الصناعات <i class="fas fa-chevron-down" style="font-size:0.7rem"></i></a>
+          <div class="dropdown-menu">
+            <a href="industries.html" class="dropdown-item"><i class="fas fa-industry"></i> قطاعات الصناعة</a>
+            <a href="investment-opportunities.html" class="dropdown-item"><i class="fas fa-chart-line"></i> فرص الاستثمار</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="vision-2030.html" class="nav-link"><i class="fas fa-star"></i> رؤية 2030</a>
+        </div>
+        <div class="nav-item">
+          <a href="economic-statistics.html" class="nav-link"><i class="fas fa-chart-bar"></i> الإحصاءات <i class="fas fa-chevron-down" style="font-size:0.7rem"></i></a>
+          <div class="dropdown-menu">
+            <a href="economic-statistics.html" class="dropdown-item"><i class="fas fa-chart-pie"></i> الإحصاءات الاقتصادية</a>
+            <a href="industrial-timeline.html" class="dropdown-item"><i class="fas fa-history"></i> الجدول الزمني</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="about-platform.html" class="nav-link"><i class="fas fa-info-circle"></i> عن المنصة</a>
+        </div>
+      </nav>
+      <div class="header-actions">
+        <button class="btn-search" id="searchBtn" aria-label="بحث"><i class="fas fa-search"></i></button>
+        <a href="contact.html" class="btn-cta">تواصل معنا</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="القائمة" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<div id="searchOverlay">
+  <div class="search-overlay-inner">
+    <div class="search-overlay-bar">
+      <input type="text" id="globalSearchInput" placeholder="ابحث عن مدينة صناعية، صناعة، أو استثمار...">
+      <button id="searchClose"><i class="fas fa-times"></i></button>
+    </div>
+    <div id="searchResults"></div>
+  </div>
+</div>
+
+
+<section class="hero">
+  <div class="hero-bg" style="background-image: url('vision_2030_industrial.png')"></div>
+  <div class="hero-overlay"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge"><i class="fas fa-star"></i> رؤية المملكة 2030 - التحول الصناعي</div>
+      <h1 class="hero-title">
+        بوابة المدن الصناعية<br>
+        في <span class="highlight">المملكة العربية السعودية</span>
+      </h1>
+      <p class="hero-description">
+        منصة متكاملة تجمع معلومات شاملة عن المدن الصناعية السعودية، وتربط المستثمرين بالفرص الصناعية الواعدة التي تدعم تحقيق مستهدفات رؤية 2030.
+      </p>
+      <div class="hero-actions">
+        <a href="industrial-map.html" class="btn btn-primary btn-lg">
+          <i class="fas fa-map-marked-alt"></i>
+          استكشف الخريطة التفاعلية
+        </a>
+        <a href="explore-cities.html" class="btn btn-outline btn-lg">
+          <i class="fas fa-city"></i>
+          تصفح المدن الصناعية
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="number" data-counter="36" data-suffix="+">0</div>
+          <div class="label">مدينة صناعية</div>
+        </div>
+        <div class="hero-stat">
+          <div class="number" data-counter="9500" data-suffix="+">0</div>
+          <div class="label">منشأة صناعية</div>
+        </div>
+        <div class="hero-stat">
+          <div class="number" data-counter="850000" data-suffix="+">0</div>
+          <div class="label">عامل وموظف</div>
+        </div>
+        <div class="hero-stat">
+          <div class="number" data-counter="285" data-suffix=" مليار">0</div>
+          <div class="label">ريال صادرات سنوية</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="features-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-badge"><i class="fas fa-gem"></i> ما يميز منصتنا</div>
+      <h2 class="section-title">كل ما تحتاجه في مكان واحد</h2>
+      <p class="section-subtitle">منصة متكاملة تجمع المعلومات والبيانات والأدوات التفاعلية لمساعدتك في اتخاذ قرارات استثمارية مدروسة</p>
+      <div class="title-line"></div>
+    </div>
+    <div class="grid-4 stagger-children">
+      <div class="feature-box">
+        <div class="icon"><i class="fas fa-map-marked-alt"></i></div>
+        <h3>خريطة تفاعلية</h3>
+        <p>استكشف مواقع المدن الصناعية على خريطة المملكة التفاعلية مع تفاصيل كل مدينة</p>
+      </div>
+      <div class="feature-box">
+        <div class="icon"><i class="fas fa-chart-line"></i></div>
+        <h3>إحصاءات اقتصادية</h3>
+        <p>بيانات ومؤشرات اقتصادية شاملة تعكس أداء القطاع الصناعي ومساهمته في الناتج المحلي</p>
+      </div>
+      <div class="feature-box">
+        <div class="icon"><i class="fas fa-balance-scale"></i></div>
+        <h3>مقارنة المدن</h3>
+        <p>قارن بين المدن الصناعية المختلفة وفق معايير متعددة لاختيار الأنسب لمشروعك</p>
+      </div>
+      <div class="feature-box">
+        <div class="icon"><i class="fas fa-compass"></i></div>
+        <h3>ابحث عن مدينتك</h3>
+        <p>أداة ذكية تساعدك في تحديد المدينة الصناعية الأنسب لطبيعة مشروعك واحتياجاتك</p>
+      </div>
+      <div class="feature-box">
+        <div class="icon"><i class="fas fa-handshake"></i></div>
+        <h3>فرص الاستثمار</h3>
+        <p>اكتشف الفرص الاستثمارية المتاحة في المدن الصناعية مع تفاصيل الحوافز والمزايا</p>
+      </div>
+      <div class="feature-box">
+        <div class="icon"><i class="fas fa-history"></i></div>
+        <h3>الجدول الزمني</h3>
+        <p>رحلة تاريخية في مسيرة التطوير الصناعي السعودي من 1975 حتى رؤية 2030</p>
+      </div>
+      <div class="feature-box">
+        <div class="icon"><i class="fas fa-industry"></i></div>
+        <h3>قطاعات الصناعة</h3>
+        <p>تعرف على القطاعات الصناعية الرئيسية وأبرز الشركات العاملة في كل قطاع</p>
+      </div>
+      <div class="feature-box">
+        <div class="icon"><i class="fas fa-star"></i></div>
+        <h3>رؤية 2030</h3>
+        <p>تتبع مستهدفات رؤية 2030 الصناعية ومدى تقدم المملكة في تحقيقها</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="cities-showcase">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-badge"><i class="fas fa-city"></i> أبرز المدن الصناعية</div>
+      <h2 class="section-title">المدن الصناعية الكبرى</h2>
+      <p class="section-subtitle">تضم المملكة العربية السعودية شبكة من المدن الصناعية المتطورة تمتد من الشمال إلى الجنوب</p>
+      <div class="title-line"></div>
+    </div>
+    <div class="showcase-grid">
+      <a href="city-details.html?id=jubail" class="showcase-item reveal">
+        <img src="jubail_industrial_city.png" alt="الجبيل الصناعية" loading="lazy">
+        <div class="showcase-overlay">
+          <h3>مدينة الجبيل الصناعية</h3>
+          <p>أكبر مجمع بتروكيماوي في العالم</p>
+        </div>
+      </a>
+      <a href="city-details.html?id=jeddah" class="showcase-item reveal delay-100">
+        <img src="jeddah_industrial_city.png" alt="جدة الصناعية" loading="lazy">
+        <div class="showcase-overlay">
+          <h3>المدينة الصناعية - جدة</h3>
+          <p>بوابة التجارة الدولية</p>
+        </div>
+      </a>
+      <a href="city-details.html?id=yanbu" class="showcase-item reveal delay-200">
+        <img src="yanbu_industrial_city.png" alt="ينبع الصناعية" loading="lazy">
+        <div class="showcase-overlay">
+          <h3>مدينة ينبع الصناعية</h3>
+          <p>مركز التكرير على البحر الأحمر</p>
+        </div>
+      </a>
+      <a href="city-details.html?id=riyadh" class="showcase-item reveal delay-300">
+        <img src="riyadh_first_industrial_city.png" alt="الرياض الصناعية" loading="lazy">
+        <div class="showcase-overlay">
+          <h3>المدينة الصناعية - الرياض</h3>
+          <p>قلب الصناعة في المنطقة الوسطى</p>
+        </div>
+      </a>
+      <a href="city-details.html?id=jizan" class="showcase-item reveal delay-400">
+        <img src="jazan_industrial_city.png" alt="جازان الصناعية" loading="lazy">
+        <div class="showcase-overlay">
+          <h3>المدينة الصناعية - جازان</h3>
+          <p>بوابة الجنوب الصناعية</p>
+        </div>
+      </a>
+    </div>
+    <div class="text-center mt-48">
+      <a href="industrial-cities.html" class="btn btn-dark btn-lg">
+        <i class="fas fa-th-large"></i>
+        عرض جميع المدن الصناعية
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<section class="vision-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-badge" style="background:rgba(212,175,55,0.15);border-color:rgba(212,175,55,0.4)"><i class="fas fa-star"></i> رؤية المملكة 2030</div>
+      <h2 class="section-title" style="color:var(--white)">المدن الصناعية ورؤية 2030</h2>
+      <p class="section-subtitle">تُشكّل المدن الصناعية ركيزة أساسية في تحقيق مستهدفات رؤية المملكة 2030 للتنويع الاقتصادي</p>
+      <div class="title-line"></div>
+    </div>
+    <div class="grid-4 stagger-children">
+      <div class="vision-card reveal">
+        <div class="icon"><i class="fas fa-chart-line"></i></div>
+        <h4>رفع مساهمة الصناعة</h4>
+        <p>مضاعفة مساهمة القطاع الصناعي في الناتج المحلي من 12.5% إلى 25% بحلول 2030</p>
+      </div>
+      <div class="vision-card reveal delay-100">
+        <div class="icon"><i class="fas fa-ship"></i></div>
+        <h4>تعزيز الصادرات</h4>
+        <p>رفع قيمة الصادرات غير النفطية إلى 500 مليار ريال سنوياً</p>
+      </div>
+      <div class="vision-card reveal delay-200">
+        <div class="icon"><i class="fas fa-users"></i></div>
+        <h4>توطين الوظائف</h4>
+        <p>رفع نسبة السعودة في القطاع الصناعي إلى 60% وخلق 1.5 مليون وظيفة جديدة</p>
+      </div>
+      <div class="vision-card reveal delay-300">
+        <div class="icon"><i class="fas fa-globe"></i></div>
+        <h4>استقطاب الاستثمار</h4>
+        <p>استقطاب استثمارات أجنبية بقيمة 300 مليار ريال في القطاع الصناعي</p>
+      </div>
+    </div>
+    <div class="text-center mt-48">
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-bottom:40px">
+        <div style="text-align:center">
+          <div style="font-size:2.5rem;font-weight:900;color:var(--gold)" data-counter="12.5" data-suffix="%">0</div>
+          <div style="color:rgba(255,255,255,0.6);font-size:0.85rem">المساهمة الحالية</div>
+          <div class="progress-bar" style="margin-top:8px"><div class="progress-fill" data-width="50"></div></div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:2.5rem;font-weight:900;color:var(--gold)" data-counter="285" data-suffix=" مليار">0</div>
+          <div style="color:rgba(255,255,255,0.6);font-size:0.85rem">الصادرات الحالية (ريال)</div>
+          <div class="progress-bar" style="margin-top:8px"><div class="progress-fill" data-width="57"></div></div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:2.5rem;font-weight:900;color:var(--gold)" data-counter="42" data-suffix="%">0</div>
+          <div style="color:rgba(255,255,255,0.6);font-size:0.85rem">نسبة التوطين الحالية</div>
+          <div class="progress-bar" style="margin-top:8px"><div class="progress-fill" data-width="70"></div></div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:2.5rem;font-weight:900;color:var(--gold)" data-counter="145" data-suffix=" مليار">0</div>
+          <div style="color:rgba(255,255,255,0.6);font-size:0.85rem">الاستثمار الأجنبي (ريال)</div>
+          <div class="progress-bar" style="margin-top:8px"><div class="progress-fill" data-width="48"></div></div>
+        </div>
+      </div>
+      <a href="vision-2030.html" class="btn btn-primary btn-lg">
+        <i class="fas fa-star"></i>
+        تفاصيل رؤية 2030
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<section class="industries-preview">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-badge"><i class="fas fa-cogs"></i> القطاعات الصناعية</div>
+      <h2 class="section-title">أبرز القطاعات الصناعية</h2>
+      <p class="section-subtitle">تتنوع الصناعات في المدن الصناعية السعودية لتشمل قطاعات استراتيجية متعددة</p>
+      <div class="title-line"></div>
+    </div>
+    <div class="grid-2">
+      <div>
+        <a href="industry-details.html?id=petrochemicals" class="industry-pill reveal">
+          <div class="icon" style="background:linear-gradient(135deg,#2C3E50,#34495E)"><i class="fas fa-oil-well"></i></div>
+          <div>
+            <h4>البتروكيماويات</h4>
+            <p>35% من الناتج الصناعي - 85 شركة</p>
+          </div>
+          <i class="fas fa-arrow-left arrow"></i>
+        </a>
+        <a href="industry-details.html?id=food" class="industry-pill reveal delay-100">
+          <div class="icon" style="background:linear-gradient(135deg,#D4AF37,#C9A961)"><i class="fas fa-wheat-awn"></i></div>
+          <div>
+            <h4>الصناعات الغذائية</h4>
+            <p>18% من الناتج الصناعي - 1200 شركة</p>
+          </div>
+          <i class="fas fa-arrow-left arrow"></i>
+        </a>
+        <a href="industry-details.html?id=steel" class="industry-pill reveal delay-200">
+          <div class="icon" style="background:linear-gradient(135deg,#34495E,#2C3E50)"><i class="fas fa-hammer"></i></div>
+          <div>
+            <h4>الحديد والصلب</h4>
+            <p>12% من الناتج الصناعي - 45 شركة</p>
+          </div>
+          <i class="fas fa-arrow-left arrow"></i>
+        </a>
+      </div>
+      <div>
+        <a href="industry-details.html?id=pharmaceuticals" class="industry-pill reveal">
+          <div class="icon" style="background:linear-gradient(135deg,#C9A961,#D4AF37)"><i class="fas fa-pills"></i></div>
+          <div>
+            <h4>الصناعات الدوائية</h4>
+            <p>8% من الناتج الصناعي - 180 شركة</p>
+          </div>
+          <i class="fas fa-arrow-left arrow"></i>
+        </a>
+        <a href="industry-details.html?id=construction" class="industry-pill reveal delay-100">
+          <div class="icon" style="background:linear-gradient(135deg,#666,#888)"><i class="fas fa-building"></i></div>
+          <div>
+            <h4>مواد البناء</h4>
+            <p>10% من الناتج الصناعي - 650 شركة</p>
+          </div>
+          <i class="fas fa-arrow-left arrow"></i>
+        </a>
+        <a href="industry-details.html?id=logistics" class="industry-pill reveal delay-200">
+          <div class="icon" style="background:linear-gradient(135deg,#2C3E50,#34495E)"><i class="fas fa-truck"></i></div>
+          <div>
+            <h4>اللوجستيات</h4>
+            <p>7% من الناتج الصناعي - 320 شركة</p>
+          </div>
+          <i class="fas fa-arrow-left arrow"></i>
+        </a>
+      </div>
+    </div>
+    <div class="text-center mt-48">
+      <a href="industries.html" class="btn btn-dark btn-lg">
+        <i class="fas fa-industry"></i>
+        استكشاف جميع القطاعات
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<section class="map-preview-section">
+  <div class="container">
+    <div class="grid-2 align-center" style="gap:60px">
+      <div>
+        <div class="section-badge" style="background:rgba(212,175,55,0.15);border-color:rgba(212,175,55,0.4);display:inline-flex;margin-bottom:20px"><i class="fas fa-map"></i> الخريطة التفاعلية</div>
+        <h2 style="color:var(--white);font-size:2.2rem;margin-bottom:20px">استكشف المدن على خريطة المملكة</h2>
+        <p style="color:rgba(255,255,255,0.7);line-height:1.9;margin-bottom:32px">
+          تفاعل مع خريطة المملكة العربية السعودية واكتشف مواقع المدن الصناعية. اضغط على أي مدينة لعرض تفاصيلها الكاملة من صناعات وخدمات ودور في رؤية 2030.
+        </p>
+        <div class="feature-list" style="margin-bottom:32px">
+          <div class="feature-item" style="background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.1)">
+            <div class="feature-icon" style="background:rgba(212,175,55,0.15)"><i class="fas fa-map-pin" style="color:var(--gold)"></i></div>
+            <div class="feature-text"><h4 style="color:var(--white)">نقاط تفاعلية</h4><p style="color:rgba(255,255,255,0.6)">اضغط على أي نقطة لعرض تفاصيل المدينة</p></div>
+          </div>
+          <div class="feature-item" style="background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.1)">
+            <div class="feature-icon" style="background:rgba(212,175,55,0.15)"><i class="fas fa-filter" style="color:var(--gold)"></i></div>
+            <div class="feature-text"><h4 style="color:var(--white)">تصفية حسب الصناعة</h4><p style="color:rgba(255,255,255,0.6)">فلتر المدن حسب نوع الصناعة أو المنطقة</p></div>
+          </div>
+        </div>
+        <a href="industrial-map.html" class="btn btn-primary btn-lg">
+          <i class="fas fa-map-marked-alt"></i>
+          فتح الخريطة التفاعلية
+        </a>
+      </div>
+      <div class="map-preview-img reveal-scale">
+        <img src="saudi_map_exploration.png" alt="خريطة المملكة" loading="lazy">
+        <div class="map-preview-overlay">
+          <a href="industrial-map.html" class="map-preview-btn">
+            <i class="fas fa-expand-arrows-alt"></i>
+            فتح الخريطة
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="news-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-badge"><i class="fas fa-newspaper"></i> آخر الأخبار</div>
+      <h2 class="section-title">أخبار المدن الصناعية</h2>
+      <p class="section-subtitle">تابع آخر المستجدات والتطورات في القطاع الصناعي السعودي</p>
+      <div class="title-line"></div>
+    </div>
+    <div class="grid-3">
+      <div class="news-card reveal">
+        <div class="news-card-img"><img src="jubail_industrial_city.png" alt="خبر 1" loading="lazy"></div>
+        <div class="news-card-body">
+          <div class="news-date"><i class="fas fa-calendar-alt"></i> يناير 2026</div>
+          <h3 class="news-title">الجبيل الصناعية تستقطب استثمارات بقيمة 15 مليار ريال في مشاريع بتروكيماوية جديدة</h3>
+          <p class="news-excerpt">أعلنت هيئة المدن الصناعية عن إطلاق حزمة مشاريع استثمارية ضخمة في مدينة الجبيل الصناعية...</p>
+        </div>
+      </div>
+      <div class="news-card reveal delay-100">
+        <div class="news-card-img"><img src="saudi_smart_manufacturing.png" alt="خبر 2" loading="lazy"></div>
+        <div class="news-card-body">
+          <div class="news-date"><i class="fas fa-calendar-alt"></i> فبراير 2026</div>
+          <h3 class="news-title">إطلاق مبادرة التصنيع الذكي في المدن الصناعية السعودية لتبني تقنيات الثورة الصناعية الرابعة</h3>
+          <p class="news-excerpt">أطلقت وزارة الصناعة مبادرة شاملة لتحويل المدن الصناعية إلى مراكز للتصنيع الذكي...</p>
+        </div>
+      </div>
+      <div class="news-card reveal delay-200">
+        <div class="news-card-img"><img src="jazan_industrial_export_growth.png" alt="خبر 3" loading="lazy"></div>
+        <div class="news-card-body">
+          <div class="news-date"><i class="fas fa-calendar-alt"></i> مارس 2026</div>
+          <h3 class="news-title">المدينة الصناعية في جازان تحقق نمواً بنسبة 25% في الصادرات خلال العام الماضي</h3>
+          <p class="news-excerpt">سجلت المدينة الصناعية في جازان أرقاماً قياسية في الصادرات مدفوعةً بتطوير مجمع جازان الاقتصادي...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="partners-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-badge"><i class="fas fa-handshake"></i> الشركاء والجهات الداعمة</div>
+      <h2 class="section-title">الجهات الحكومية الداعمة</h2>
+      <div class="title-line"></div>
+    </div>
+    <div class="grid-5 stagger-children">
+      <div class="partner-logo"><span>وزارة الصناعة والثروة المعدنية</span></div>
+      <div class="partner-logo"><span>هيئة المدن الصناعية (مدن)</span></div>
+      <div class="partner-logo"><span>صندوق الاستثمارات العامة</span></div>
+      <div class="partner-logo"><span>وزارة الاستثمار</span></div>
+      <div class="partner-logo"><span>هيئة تطوير الصناعة الوطنية</span></div>
+    </div>
+  </div>
+</section>
+
+
+<section class="cta-section">
+  <div class="container" style="position:relative;z-index:2;text-align:center">
+    <div class="section-badge" style="background:rgba(255,255,255,0.2);border-color:rgba(255,255,255,0.4);color:white;display:inline-flex;margin-bottom:24px"><i class="fas fa-rocket"></i> ابدأ رحلتك الاستثمارية</div>
+    <h2 style="color:white;font-size:2.5rem;margin-bottom:20px">هل أنت مستعد للاستثمار في المدن الصناعية؟</h2>
+    <p style="color:rgba(255,255,255,0.85);font-size:1.1rem;max-width:600px;margin:0 auto 40px;line-height:1.8">
+      اكتشف الفرص الاستثمارية المتاحة في المدن الصناعية السعودية وابدأ رحلتك نحو النجاح الصناعي
+    </p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+      <a href="find-your-city.html" class="btn" style="background:white;color:#D4AF37;font-weight:800;padding:16px 36px">
+        <i class="fas fa-compass"></i>
+        ابحث عن مدينتك
+      </a>
+      <a href="investment-opportunities.html" class="btn" style="background:rgba(255,255,255,0.15);color:white;border:2px solid rgba(255,255,255,0.5);padding:16px 36px">
+        <i class="fas fa-chart-line"></i>
+        فرص الاستثمار
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="site-logo">
+          <div class="logo-icon"><i class="fas fa-industry"></i></div>
+          <div class="logo-text">
+            <span class="title">منصة المدن الصناعية</span>
+            <span class="subtitle">المملكة العربية السعودية</span>
+          </div>
+        </a>
+        <p class="footer-desc">منصة متكاملة تجمع المعلومات والبيانات عن المدن الصناعية في المملكة العربية السعودية، وتدعم المستثمرين في اتخاذ قراراتهم الاستثمارية.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-youtube"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>المدن الصناعية</h4>
+        <div class="footer-links">
+          <a href="industrial-cities.html" class="footer-link"><i class="fas fa-chevron-left"></i> جميع المدن</a>
+          <a href="city-details.html?id=jubail" class="footer-link"><i class="fas fa-chevron-left"></i> الجبيل الصناعية</a>
+          <a href="city-details.html?id=yanbu" class="footer-link"><i class="fas fa-chevron-left"></i> ينبع الصناعية</a>
+          <a href="city-details.html?id=jeddah" class="footer-link"><i class="fas fa-chevron-left"></i> جدة الصناعية</a>
+          <a href="city-details.html?id=riyadh" class="footer-link"><i class="fas fa-chevron-left"></i> الرياض الصناعية</a>
+          <a href="industrial-map.html" class="footer-link"><i class="fas fa-chevron-left"></i> الخريطة التفاعلية</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>الاستثمار</h4>
+        <div class="footer-links">
+          <a href="investment-opportunities.html" class="footer-link"><i class="fas fa-chevron-left"></i> فرص الاستثمار</a>
+          <a href="industries.html" class="footer-link"><i class="fas fa-chevron-left"></i> القطاعات الصناعية</a>
+          <a href="vision-2030.html" class="footer-link"><i class="fas fa-chevron-left"></i> رؤية 2030</a>
+          <a href="economic-statistics.html" class="footer-link"><i class="fas fa-chevron-left"></i> الإحصاءات</a>
+          <a href="find-your-city.html" class="footer-link"><i class="fas fa-chevron-left"></i> ابحث عن مدينتك</a>
+          <a href="compare-cities.html" class="footer-link"><i class="fas fa-chevron-left"></i> مقارنة المدن</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>المنصة</h4>
+        <div class="footer-links">
+          <a href="about-platform.html" class="footer-link"><i class="fas fa-chevron-left"></i> عن المنصة</a>
+          <a href="industrial-timeline.html" class="footer-link"><i class="fas fa-chevron-left"></i> الجدول الزمني</a>
+          <a href="contact.html" class="footer-link"><i class="fas fa-chevron-left"></i> تواصل معنا</a>
+        </div>
+        <div style="margin-top:24px;padding:16px;background:rgba(212,175,55,0.1);border-radius:10px;border:1px solid rgba(212,175,55,0.2)">
+          <div style="color:var(--gold);font-weight:700;margin-bottom:8px;font-size:0.9rem"><i class="fas fa-phone-alt"></i> للاستفسار</div>
+          <div style="color:rgba(255,255,255,0.7);font-size:0.85rem">920000000</div>
+          <div style="color:rgba(255,255,255,0.7);font-size:0.85rem;margin-top:4px">info@industrial-sa.gov.sa</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>جميع الحقوق محفوظة 2026 - منصة المدن الصناعية في المملكة العربية السعودية</p>
+      <div class="footer-bottom-links">
+        <a href="#">سياسة الخصوصية</a>
+        <a href="#">شروط الاستخدام</a>
+        <a href="#">إخلاء المسؤولية</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<button class="back-to-top" id="backToTop" aria-label="العودة للأعلى">
+  <i class="fas fa-chevron-up"></i>
+</button>
+
+
+<div id="cookieBanner">
+  <i class="fas fa-cookie-bite" style="color:var(--gold);font-size:1.5rem;flex-shrink:0"></i>
+  <span>نستخدم ملفات تعريف الارتباط لتحسين تجربتك على المنصة</span>
+  <button class="cookie-accept">موافق</button>
+</div>
+
+<script src="cities.js"></script>
+<script src="main.js"></script>
+<script src="search.js"></script>
+</body>
+</html>

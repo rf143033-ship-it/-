@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>المدن الصناعية - منصة المدن الصناعية</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="animations.css">
+  <link rel="stylesheet" href="responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    .city-grid-card { background: var(--white); border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border); transition: var(--transition); display: flex; flex-direction: column; }
+    .city-grid-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: rgba(212,175,55,0.3); }
+    .city-grid-card .card-image { height: 220px; overflow: hidden; position: relative; }
+    .city-grid-card .card-image img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition-slow); }
+    .city-grid-card:hover .card-image img { transform: scale(1.08); }
+    .city-grid-card .card-body { padding: 24px; flex: 1; }
+    .city-grid-card .card-footer { padding: 16px 24px; border-top: 1px solid var(--border); display: flex; gap: 12px; }
+    .city-stat-badge { display: flex; align-items: center; gap: 6px; font-size: 0.82rem; color: var(--text-light); }
+    .city-stat-badge i { color: var(--gold); }
+    .region-badge { display: inline-block; padding: 4px 12px; background: rgba(212,175,55,0.1); color: var(--gold); border-radius: 100px; font-size: 0.78rem; font-weight: 600; margin-bottom: 10px; }
+    .view-toggle { display: flex; gap: 4px; background: var(--off-white); padding: 4px; border-radius: var(--radius-sm); }
+    .view-btn { width: 36px; height: 36px; border-radius: 6px; background: none; display: flex; align-items: center; justify-content: center; color: var(--text-light); transition: var(--transition); }
+    .view-btn.active { background: var(--white); color: var(--gold); box-shadow: var(--shadow-sm); }
+    .list-view .cities-grid { grid-template-columns: 1fr; }
+    .list-view .city-grid-card { flex-direction: row; }
+    .list-view .city-grid-card .card-image { width: 280px; height: auto; flex-shrink: 0; }
+    .list-view .city-grid-card .card-body { padding: 28px; }
+    @media (max-width: 767px) { .list-view .city-grid-card { flex-direction: column; } .list-view .city-grid-card .card-image { width: 100%; height: 200px; } }
+  </style>
+</head>
+<body>
+
+<div id="pageLoader" class="page-loader">
+  <div class="loader-inner">
+    <div class="loader-logo"><i class="fas fa-industry"></i></div>
+    <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+    <p class="loader-text">المدن الصناعية</p>
+  </div>
+</div>
+
+<header class="site-header" id="siteHeader">
+  <div class="container">
+    <div class="header-inner">
+      <a href="index.html" class="site-logo">
+        <div class="logo-icon"><i class="fas fa-industry"></i></div>
+        <div class="logo-text">
+          <span class="title">منصة المدن الصناعية</span>
+          <span class="subtitle">المملكة العربية السعودية</span>
+        </div>
+      </a>
+      <nav class="main-nav" id="mainNav">
+        <div class="nav-item">
+          <a href="index.html" class="nav-link"><i class="fas fa-home"></i> الرئيسية</a>
+        </div>
+        <div class="nav-item">
+          <a href="industrial-cities.html" class="nav-link active"><i class="fas fa-city"></i> المدن الصناعية <i class="fas fa-chevron-down" style="font-size:0.7rem"></i></a>
+          <div class="dropdown-menu">
+            <a href="industrial-cities.html" class="dropdown-item"><i class="fas fa-list"></i> جميع المدن</a>
+            <a href="explore-cities.html" class="dropdown-item"><i class="fas fa-search"></i> استكشاف المدن</a>
+            <a href="compare-cities.html" class="dropdown-item"><i class="fas fa-balance-scale"></i> مقارنة المدن</a>
+            <a href="find-your-city.html" class="dropdown-item"><i class="fas fa-map-pin"></i> ابحث عن مدينتك</a>
+            <a href="industrial-map.html" class="dropdown-item"><i class="fas fa-map"></i> الخريطة التفاعلية</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="industries.html" class="nav-link"><i class="fas fa-cogs"></i> الصناعات <i class="fas fa-chevron-down" style="font-size:0.7rem"></i></a>
+          <div class="dropdown-menu">
+            <a href="industries.html" class="dropdown-item"><i class="fas fa-industry"></i> قطاعات الصناعة</a>
+            <a href="investment-opportunities.html" class="dropdown-item"><i class="fas fa-chart-line"></i> فرص الاستثمار</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="vision-2030.html" class="nav-link"><i class="fas fa-star"></i> رؤية 2030</a>
+        </div>
+        <div class="nav-item">
+          <a href="economic-statistics.html" class="nav-link"><i class="fas fa-chart-bar"></i> الإحصاءات <i class="fas fa-chevron-down" style="font-size:0.7rem"></i></a>
+          <div class="dropdown-menu">
+            <a href="economic-statistics.html" class="dropdown-item"><i class="fas fa-chart-pie"></i> الإحصاءات الاقتصادية</a>
+            <a href="industrial-timeline.html" class="dropdown-item"><i class="fas fa-history"></i> الجدول الزمني</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="about-platform.html" class="nav-link"><i class="fas fa-info-circle"></i> عن المنصة</a>
+        </div>
+      </nav>
+      <div class="header-actions">
+        <button class="btn-search" id="searchBtn" aria-label="بحث"><i class="fas fa-search"></i></button>
+        <a href="contact.html" class="btn-cta">تواصل معنا</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="القائمة" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div id="searchOverlay">
+  <div class="search-overlay-inner">
+    <div class="search-overlay-bar">
+      <input type="text" id="globalSearchInput" placeholder="ابحث...">
+      <button id="searchClose"><i class="fas fa-times"></i></button>
+    </div>
+    <div id="searchResults"></div>
+  </div>
+</div>
+
+
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-content">
+      <div class="breadcrumb">
+        <a href="index.html" class="breadcrumb-item">الرئيسية</a>
+        <span class="breadcrumb-separator"><i class="fas fa-chevron-left"></i></span>
+        <span class="breadcrumb-item">المدن الصناعية</span>
+      </div>
+      <h1 class="page-hero-title">المدن الصناعية في المملكة</h1>
+      <p class="page-hero-subtitle">تعرف على شبكة المدن الصناعية المنتشرة في أرجاء المملكة العربية السعودية وما تقدمه من فرص استثمارية</p>
+    </div>
+  </div>
+</section>
+
+
+<section class="section-sm" style="background:var(--off-white)">
+  <div class="container">
+    <div class="grid-4">
+      <div class="stat-card"><div class="icon"><i class="fas fa-city"></i></div><div class="number" data-counter="36">0</div><div class="label">مدينة صناعية</div></div>
+      <div class="stat-card"><div class="icon"><i class="fas fa-industry"></i></div><div class="number" data-counter="9500">0</div><div class="label">منشأة صناعية</div></div>
+      <div class="stat-card"><div class="icon"><i class="fas fa-users"></i></div><div class="number" data-counter="850000">0</div><div class="label">عامل وموظف</div></div>
+      <div class="stat-card"><div class="icon"><i class="fas fa-map-marker-alt"></i></div><div class="number" data-counter="13">0</div><div class="label">منطقة إدارية</div></div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container">
+    
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:32px">
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        <div class="search-bar" style="min-width:280px">
+          <input type="text" id="citySearch" placeholder="ابحث عن مدينة...">
+          <button><i class="fas fa-search"></i></button>
+        </div>
+        <select id="regionFilterMain" class="form-control" style="width:auto;padding:12px 40px 12px 16px">
+          <option value="">جميع المناطق</option>
+          <option value="منطقة الرياض">منطقة الرياض</option>
+          <option value="منطقة مكة المكرمة">منطقة مكة المكرمة</option>
+          <option value="المنطقة الشرقية">المنطقة الشرقية</option>
+          <option value="منطقة المدينة المنورة">منطقة المدينة المنورة</option>
+          <option value="منطقة حائل">منطقة حائل</option>
+          <option value="منطقة جازان">منطقة جازان</option>
+          <option value="منطقة تبوك">منطقة تبوك</option>
+          <option value="منطقة الحدود الشمالية">منطقة الحدود الشمالية</option>
+          <option value="منطقة نجران">منطقة نجران</option>
+        </select>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="font-size:0.88rem;color:var(--text-light)">عرض: <strong id="citiesCountMain">0</strong> مدينة</span>
+        <div class="view-toggle">
+          <button class="view-btn active" id="gridViewBtn" title="عرض شبكي"><i class="fas fa-th"></i></button>
+          <button class="view-btn" id="listViewBtn" title="عرض قائمة"><i class="fas fa-list"></i></button>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="grid-3 stagger-children" id="citiesGridMain">
+      
+    </div>
+
+    
+    <div class="text-center mt-48">
+      <a href="explore-cities.html" class="btn btn-dark btn-lg">
+        <i class="fas fa-search"></i>
+        استكشاف متقدم للمدن
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<section style="padding:80px 0;background:var(--primary)">
+  <div class="container text-center">
+    <h2 style="color:white;margin-bottom:16px">ابحث عن المدينة المناسبة لمشروعك</h2>
+    <p style="color:rgba(255,255,255,0.7);margin-bottom:32px;max-width:500px;margin-left:auto;margin-right:auto">استخدم أداة البحث الذكية لتحديد المدينة الصناعية الأنسب لطبيعة مشروعك</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+      <a href="find-your-city.html" class="btn btn-primary btn-lg"><i class="fas fa-compass"></i> ابحث عن مدينتك</a>
+      <a href="compare-cities.html" class="btn btn-outline btn-lg"><i class="fas fa-balance-scale"></i> قارن المدن</a>
+      <a href="industrial-map.html" class="btn btn-outline btn-lg"><i class="fas fa-map"></i> الخريطة التفاعلية</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="site-logo">
+          <div class="logo-icon"><i class="fas fa-industry"></i></div>
+          <div class="logo-text">
+            <span class="title">منصة المدن الصناعية</span>
+            <span class="subtitle">المملكة العربية السعودية</span>
+          </div>
+        </a>
+        <p class="footer-desc">منصة متكاملة تجمع المعلومات والبيانات عن المدن الصناعية في المملكة العربية السعودية، وتدعم المستثمرين في اتخاذ قراراتهم الاستثمارية.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-youtube"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>المدن الصناعية</h4>
+        <div class="footer-links">
+          <a href="industrial-cities.html" class="footer-link"><i class="fas fa-chevron-left"></i> جميع المدن</a>
+          <a href="city-details.html?id=jubail" class="footer-link"><i class="fas fa-chevron-left"></i> الجبيل الصناعية</a>
+          <a href="city-details.html?id=yanbu" class="footer-link"><i class="fas fa-chevron-left"></i> ينبع الصناعية</a>
+          <a href="city-details.html?id=jeddah" class="footer-link"><i class="fas fa-chevron-left"></i> جدة الصناعية</a>
+          <a href="city-details.html?id=riyadh" class="footer-link"><i class="fas fa-chevron-left"></i> الرياض الصناعية</a>
+          <a href="industrial-map.html" class="footer-link"><i class="fas fa-chevron-left"></i> الخريطة التفاعلية</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>الاستثمار</h4>
+        <div class="footer-links">
+          <a href="investment-opportunities.html" class="footer-link"><i class="fas fa-chevron-left"></i> فرص الاستثمار</a>
+          <a href="industries.html" class="footer-link"><i class="fas fa-chevron-left"></i> القطاعات الصناعية</a>
+          <a href="vision-2030.html" class="footer-link"><i class="fas fa-chevron-left"></i> رؤية 2030</a>
+          <a href="economic-statistics.html" class="footer-link"><i class="fas fa-chevron-left"></i> الإحصاءات</a>
+          <a href="find-your-city.html" class="footer-link"><i class="fas fa-chevron-left"></i> ابحث عن مدينتك</a>
+          <a href="compare-cities.html" class="footer-link"><i class="fas fa-chevron-left"></i> مقارنة المدن</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>المنصة</h4>
+        <div class="footer-links">
+          <a href="about-platform.html" class="footer-link"><i class="fas fa-chevron-left"></i> عن المنصة</a>
+          <a href="industrial-timeline.html" class="footer-link"><i class="fas fa-chevron-left"></i> الجدول الزمني</a>
+          <a href="contact.html" class="footer-link"><i class="fas fa-chevron-left"></i> تواصل معنا</a>
+        </div>
+        <div style="margin-top:24px;padding:16px;background:rgba(212,175,55,0.1);border-radius:10px;border:1px solid rgba(212,175,55,0.2)">
+          <div style="color:var(--gold);font-weight:700;margin-bottom:8px;font-size:0.9rem"><i class="fas fa-phone-alt"></i> للاستفسار</div>
+          <div style="color:rgba(255,255,255,0.7);font-size:0.85rem">920000000</div>
+          <div style="color:rgba(255,255,255,0.7);font-size:0.85rem;margin-top:4px">info@industrial-sa.gov.sa</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>جميع الحقوق محفوظة 2026 - منصة المدن الصناعية في المملكة العربية السعودية</p>
+      <div class="footer-bottom-links">
+        <a href="#">سياسة الخصوصية</a>
+        <a href="#">شروط الاستخدام</a>
+        <a href="#">إخلاء المسؤولية</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></button>
+
+<script src="cities.js"></script>
+<script src="main.js"></script>
+<script>
+(function() {
+  const grid = document.getElementById('citiesGridMain');
+  const searchInput = document.getElementById('citySearch');
+  const regionFilter = document.getElementById('regionFilterMain');
+  const countEl = document.getElementById('citiesCountMain');
+  const gridBtn = document.getElementById('gridViewBtn');
+  const listBtn = document.getElementById('listViewBtn');
+
+  function renderCities(data) {
+    if (!grid) return;
+    countEl.textContent = data.length;
+    grid.classList.remove('revealed');
+    grid.innerHTML = data.map(city => `
+      <a href="city-details.html?id=${city.id}" class="city-grid-card reveal">
+        <div class="card-image">
+          <img src="${city.image}" alt="${city.name}" loading="lazy">
+          <span class="card-badge">${city.region}</span>
+        </div>
+        <div class="card-body">
+          <div class="region-badge">${city.region}</div>
+          <h3 style="font-size:1.05rem;color:var(--primary);margin-bottom:10px">${city.name}</h3>
+          <p style="font-size:0.85rem;color:var(--text-light);line-height:1.7;margin-bottom:16px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden">${city.description}</p>
+          <div class="tags">
+            ${city.industries.slice(0,3).map(i => `<span class="tag">${i}</span>`).join('')}
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="city-stat-badge"><i class="fas fa-industry"></i> ${city.factories.toLocaleString('ar-SA')}</span>
+          <span class="city-stat-badge"><i class="fas fa-users"></i> ${city.workers.toLocaleString('ar-SA')}</span>
+          <span class="city-stat-badge"><i class="fas fa-calendar"></i> ${city.established}</span>
+        </div>
+      </a>
+    `).join('');
+    setTimeout(() => grid.classList.add('revealed'), 50);
+  }
+
+  function applyFilters() {
+    let data = [...CITIES_DATA];
+    const s = searchInput ? searchInput.value.trim() : '';
+    const r = regionFilter ? regionFilter.value : '';
+    if (s) data = data.filter(c => c.name.includes(s) || c.region.includes(s));
+    if (r) data = data.filter(c => c.region === r);
+    renderCities(data);
+  }
+
+  if (searchInput) searchInput.addEventListener('input', applyFilters);
+  if (regionFilter) regionFilter.addEventListener('change', applyFilters);
+
+  if (gridBtn) gridBtn.addEventListener('click', () => {
+    grid.className = 'grid-3 stagger-children';
+    gridBtn.classList.add('active');
+    listBtn.classList.remove('active');
+  });
+
+  if (listBtn) listBtn.addEventListener('click', () => {
+    grid.className = 'grid-3 stagger-children list-view';
+    listBtn.classList.add('active');
+    gridBtn.classList.remove('active');
+  });
+
+  applyFilters();
+})();
+</script>
+</body>
+</html>
