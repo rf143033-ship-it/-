@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تفاصيل الصناعة - منصة المدن الصناعية</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="animations.css">
+  <link rel="stylesheet" href="responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body id="industryDetailsPage">
+
+<div id="pageLoader" class="page-loader"><div class="loader-inner"><div class="loader-logo"><i class="fas fa-industry"></i></div><div class="loader-bar"><div class="loader-bar-fill"></div></div><p class="loader-text">تفاصيل الصناعة</p></div></div>
+
+<header class="site-header" id="siteHeader">
+  <div class="container">
+    <div class="header-inner">
+      <a href="index.html" class="site-logo">
+        <div class="logo-icon"><i class="fas fa-industry"></i></div>
+        <div class="logo-text">
+          <span class="title">منصة المدن الصناعية</span>
+          <span class="subtitle">المملكة العربية السعودية</span>
+        </div>
+      </a>
+      <nav class="main-nav" id="mainNav">
+        <div class="nav-item">
+          <a href="index.html" class="nav-link"><i class="fas fa-home"></i> الرئيسية</a>
+        </div>
+        <div class="nav-item">
+          <a href="industrial-cities.html" class="nav-link"><i class="fas fa-city"></i> المدن الصناعية <i class="fas fa-chevron-down" style="font-size:0.7rem"></i></a>
+          <div class="dropdown-menu">
+            <a href="industrial-cities.html" class="dropdown-item"><i class="fas fa-list"></i> جميع المدن</a>
+            <a href="explore-cities.html" class="dropdown-item"><i class="fas fa-search"></i> استكشاف المدن</a>
+            <a href="compare-cities.html" class="dropdown-item"><i class="fas fa-balance-scale"></i> مقارنة المدن</a>
+            <a href="find-your-city.html" class="dropdown-item"><i class="fas fa-map-pin"></i> ابحث عن مدينتك</a>
+            <a href="industrial-map.html" class="dropdown-item"><i class="fas fa-map"></i> الخريطة التفاعلية</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="industries.html" class="nav-link"><i class="fas fa-cogs"></i> الصناعات <i class="fas fa-chevron-down" style="font-size:0.7rem"></i></a>
+          <div class="dropdown-menu">
+            <a href="industries.html" class="dropdown-item"><i class="fas fa-industry"></i> قطاعات الصناعة</a>
+            <a href="investment-opportunities.html" class="dropdown-item"><i class="fas fa-chart-line"></i> فرص الاستثمار</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="vision-2030.html" class="nav-link"><i class="fas fa-star"></i> رؤية 2030</a>
+        </div>
+        <div class="nav-item">
+          <a href="economic-statistics.html" class="nav-link"><i class="fas fa-chart-bar"></i> الإحصاءات <i class="fas fa-chevron-down" style="font-size:0.7rem"></i></a>
+          <div class="dropdown-menu">
+            <a href="economic-statistics.html" class="dropdown-item"><i class="fas fa-chart-pie"></i> الإحصاءات الاقتصادية</a>
+            <a href="industrial-timeline.html" class="dropdown-item"><i class="fas fa-history"></i> الجدول الزمني</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="about-platform.html" class="nav-link"><i class="fas fa-info-circle"></i> عن المنصة</a>
+        </div>
+      </nav>
+      <div class="header-actions">
+        <button class="btn-search" id="searchBtn" aria-label="بحث"><i class="fas fa-search"></i></button>
+        <a href="contact.html" class="btn-cta">تواصل معنا</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="القائمة" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div id="searchOverlay"><div class="search-overlay-inner"><div class="search-overlay-bar"><input type="text" id="globalSearchInput" placeholder="ابحث..."><button id="searchClose"><i class="fas fa-times"></i></button></div><div id="searchResults"></div></div></div>
+
+
+<section class="page-hero" id="industryHero">
+  <div class="container">
+    <div class="page-hero-content">
+      <div class="breadcrumb"><a href="index.html" class="breadcrumb-item">الرئيسية</a><span class="breadcrumb-separator"><i class="fas fa-chevron-left"></i></span><a href="industries.html" class="breadcrumb-item">الصناعات</a><span class="breadcrumb-separator"><i class="fas fa-chevron-left"></i></span><span class="breadcrumb-item" id="industryBreadcrumb">...</span></div>
+      <h1 class="page-hero-title" id="industryName">...</h1>
+      <p class="page-hero-subtitle" id="industryTagline"></p>
+    </div>
+  </div>
+</section>
+
+
+<section class="section-sm" style="background:var(--off-white)">
+  <div class="container">
+    <div class="grid-4" id="industryStatsGrid">
+      <div class="stat-card"><div class="icon"><i class="fas fa-building"></i></div><div class="number" id="statCompanies">-</div><div class="label">شركة عاملة</div></div>
+      <div class="stat-card"><div class="icon"><i class="fas fa-users"></i></div><div class="number" id="statWorkers">-</div><div class="label">عامل وموظف</div></div>
+      <div class="stat-card"><div class="icon"><i class="fas fa-chart-pie"></i></div><div class="number" id="statGdp">-</div><div class="label">من الناتج الصناعي</div></div>
+      <div class="stat-card"><div class="icon"><i class="fas fa-ship"></i></div><div class="number" id="statExports">-</div><div class="label">مليار ريال صادرات</div></div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container">
+    <div style="display:flex;gap:40px;align-items:flex-start">
+      <div style="flex:1;min-width:0">
+        
+        <div style="border-radius:var(--radius-lg);overflow:hidden;margin-bottom:32px;height:380px">
+          <img id="industryImage" src="" alt="" style="width:100%;height:100%;object-fit:cover">
+        </div>
+        
+        <div class="content-section reveal">
+          <h3 style="font-size:1.2rem;color:var(--primary);margin-bottom:20px;padding-bottom:14px;border-bottom:2px solid var(--border);display:flex;align-items:center;gap:10px"><i class="fas fa-info-circle" style="color:var(--gold)"></i> نبذة عن الصناعة</h3>
+          <p id="industryDesc" style="line-height:1.9;font-size:1rem"></p>
+        </div>
+        
+        <div class="content-section reveal">
+          <h3 style="font-size:1.2rem;color:var(--primary);margin-bottom:20px;padding-bottom:14px;border-bottom:2px solid var(--border);display:flex;align-items:center;gap:10px"><i class="fas fa-building" style="color:var(--gold)"></i> أبرز الشركات</h3>
+          <div id="industryCompaniesGrid" class="grid-3" style="gap:16px"></div>
+        </div>
+        
+        <div class="content-section reveal">
+          <h3 style="font-size:1.2rem;color:var(--primary);margin-bottom:20px;padding-bottom:14px;border-bottom:2px solid var(--border);display:flex;align-items:center;gap:10px"><i class="fas fa-city" style="color:var(--gold)"></i> المدن الصناعية الرئيسية</h3>
+          <div id="industryCities" class="grid-3" style="gap:16px"></div>
+        </div>
+      </div>
+      
+      <div style="width:300px;flex-shrink:0;position:sticky;top:100px">
+        <div class="sidebar-card" style="background:var(--white);border-radius:var(--radius-lg);padding:28px;border:1px solid var(--border);margin-bottom:24px">
+          <h4 style="font-size:1rem;color:var(--primary);margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid var(--border);display:flex;align-items:center;gap:8px"><i class="fas fa-chart-bar" style="color:var(--gold)"></i> مؤشرات الصناعة</h4>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);font-size:0.88rem"><span style="color:var(--text-light)">الحصة من الناتج</span><span style="font-weight:700;color:var(--primary)" id="sidebarGdpShare">-</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);font-size:0.88rem"><span style="color:var(--text-light)">معدل النمو</span><span style="font-weight:700;color:var(--gold)" id="sidebarGrowth">-</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);font-size:0.88rem"><span style="color:var(--text-light)">الاستثمار المطلوب</span><span style="font-weight:700;color:var(--primary)" id="sidebarInvestment">-</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;font-size:0.88rem"><span style="color:var(--text-light)">العائد المتوقع</span><span style="font-weight:700;color:var(--gold)" id="sidebarReturn">-</span></div>
+        </div>
+        <div style="background:var(--primary);border-radius:var(--radius-lg);padding:28px">
+          <h4 style="color:white;margin-bottom:12px">هل تريد الاستثمار في هذا القطاع؟</h4>
+          <p style="color:rgba(255,255,255,0.7);font-size:0.88rem;margin-bottom:16px">تواصل معنا للحصول على معلومات تفصيلية</p>
+          <a href="investment-opportunities.html" class="btn btn-primary w-full" style="justify-content:center;margin-bottom:10px"><i class="fas fa-chart-line"></i> فرص الاستثمار</a>
+          <a href="contact.html" class="btn btn-outline w-full" style="justify-content:center"><i class="fas fa-envelope"></i> تواصل معنا</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="site-logo">
+          <div class="logo-icon"><i class="fas fa-industry"></i></div>
+          <div class="logo-text">
+            <span class="title">منصة المدن الصناعية</span>
+            <span class="subtitle">المملكة العربية السعودية</span>
+          </div>
+        </a>
+        <p class="footer-desc">منصة متكاملة تجمع المعلومات والبيانات عن المدن الصناعية في المملكة العربية السعودية، وتدعم المستثمرين في اتخاذ قراراتهم الاستثمارية.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-youtube"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>المدن الصناعية</h4>
+        <div class="footer-links">
+          <a href="industrial-cities.html" class="footer-link"><i class="fas fa-chevron-left"></i> جميع المدن</a>
+          <a href="city-details.html?id=jubail" class="footer-link"><i class="fas fa-chevron-left"></i> الجبيل الصناعية</a>
+          <a href="city-details.html?id=yanbu" class="footer-link"><i class="fas fa-chevron-left"></i> ينبع الصناعية</a>
+          <a href="city-details.html?id=jeddah" class="footer-link"><i class="fas fa-chevron-left"></i> جدة الصناعية</a>
+          <a href="city-details.html?id=riyadh" class="footer-link"><i class="fas fa-chevron-left"></i> الرياض الصناعية</a>
+          <a href="industrial-map.html" class="footer-link"><i class="fas fa-chevron-left"></i> الخريطة التفاعلية</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>الاستثمار</h4>
+        <div class="footer-links">
+          <a href="investment-opportunities.html" class="footer-link"><i class="fas fa-chevron-left"></i> فرص الاستثمار</a>
+          <a href="industries.html" class="footer-link"><i class="fas fa-chevron-left"></i> القطاعات الصناعية</a>
+          <a href="vision-2030.html" class="footer-link"><i class="fas fa-chevron-left"></i> رؤية 2030</a>
+          <a href="economic-statistics.html" class="footer-link"><i class="fas fa-chevron-left"></i> الإحصاءات</a>
+          <a href="find-your-city.html" class="footer-link"><i class="fas fa-chevron-left"></i> ابحث عن مدينتك</a>
+          <a href="compare-cities.html" class="footer-link"><i class="fas fa-chevron-left"></i> مقارنة المدن</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>المنصة</h4>
+        <div class="footer-links">
+          <a href="about-platform.html" class="footer-link"><i class="fas fa-chevron-left"></i> عن المنصة</a>
+          <a href="industrial-timeline.html" class="footer-link"><i class="fas fa-chevron-left"></i> الجدول الزمني</a>
+          <a href="contact.html" class="footer-link"><i class="fas fa-chevron-left"></i> تواصل معنا</a>
+        </div>
+        <div style="margin-top:24px;padding:16px;background:rgba(212,175,55,0.1);border-radius:10px;border:1px solid rgba(212,175,55,0.2)">
+          <div style="color:var(--gold);font-weight:700;margin-bottom:8px;font-size:0.9rem"><i class="fas fa-phone-alt"></i> للاستفسار</div>
+          <div style="color:rgba(255,255,255,0.7);font-size:0.85rem">920000000</div>
+          <div style="color:rgba(255,255,255,0.7);font-size:0.85rem;margin-top:4px">info@industrial-sa.gov.sa</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>جميع الحقوق محفوظة 2026 - منصة المدن الصناعية في المملكة العربية السعودية</p>
+      <div class="footer-bottom-links">
+        <a href="#">سياسة الخصوصية</a>
+        <a href="#">شروط الاستخدام</a>
+        <a href="#">إخلاء المسؤولية</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></button>
+
+<script src="cities.js"></script>
+<script src="main.js"></script>
+<script>
+(function() {
+  const industryId = new URLSearchParams(window.location.search).get('id') || 'petrochemicals';
+
+  const industries = {
+    petrochemicals: {
+      name: 'البتروكيماويات وتكرير النفط',
+      tagline: 'الركيزة الأساسية للصناعة السعودية',
+      description: 'تُمثل صناعة البتروكيماويات العمود الفقري للاقتصاد الصناعي السعودي، وتضم شركات عالمية كأرامكو السعودية وسابك وإيكيلينكس. تتمركز هذه الصناعة بشكل رئيسي في مدينتي الجبيل وينبع الصناعيتين، وتُنتج مجموعة واسعة من المنتجات البتروكيماوية التي تُصدَّر إلى أكثر من 100 دولة حول العالم. تُسهم هذه الصناعة بنسبة 35% من إجمالي الناتج الصناعي السعودي وتوظف أكثر من 120,000 عامل.',
+      image: 'saudi_petrochemicals_refinery.png',
+      companies: 85, workers: '120K', gdpShare: '35%', exports: '180',
+      growth: '6.5% سنوياً', investment: '50M+ ريال', returnRate: '15-25%',
+      topCompanies: ['أرامكو السعودية', 'سابك', 'إيكيلينكس', 'سبكيم', 'يانسب'],
+      cities: ['jubail', 'yanbu', 'jizan']
+    },
+    food: {
+      name: 'الصناعات الغذائية والزراعية',
+      tagline: 'تأمين الأمن الغذائي الوطني',
+      description: 'تُسهم الصناعات الغذائية بشكل كبير في تحقيق الأمن الغذائي الوطني وتوفير المنتجات الغذائية المتنوعة للسوق المحلي والتصدير. تتمركز في معظم المدن الصناعية السعودية خاصة الرياض وجدة وحائل، وتشمل صناعات الألبان والمشروبات والمواد الغذائية المعلبة والمجمدة.',
+      image: 'saudi_food_factory.png',
+      companies: 1200, workers: '180K', gdpShare: '18%', exports: '65',
+      growth: '8.2% سنوياً', investment: '5M+ ريال', returnRate: '12-20%',
+      topCompanies: ['الراجحي للأغذية', 'الشركة السعودية للألبان', 'نادك', 'الفريسكو', 'حلواني برذرز'],
+      cities: ['riyadh', 'jeddah', 'hail']
+    },
+    steel: {
+      name: 'صناعة الحديد والصلب والألمنيوم',
+      tagline: 'دعم قطاع البناء والبنية التحتية',
+      description: 'تتمركز صناعة الحديد والصلب في مدينة الجبيل الصناعية وتضم شركات كبرى مثل حديد الراجحي وسابك للحديد وألبا للألمنيوم. تُغطي هذه الصناعة الطلب المحلي المتنامي على مواد البناء في ظل المشاريع العملاقة كنيوم والقدية وغيرها من مشاريع رؤية 2030.',
+      image: 'saudi_metals_industry.png',
+      companies: 45, workers: '55K', gdpShare: '12%', exports: '42',
+      growth: '5.8% سنوياً', investment: '100M+ ريال', returnRate: '10-18%',
+      topCompanies: ['حديد الراجحي', 'سابك للحديد', 'ألبا للألمنيوم', 'الحديد السعودي', 'ماعدن'],
+      cities: ['jubail', 'yanbu', 'jizan']
+    },
+    pharmaceuticals: {
+      name: 'الصناعات الدوائية والطبية',
+      tagline: 'قطاع استراتيجي متنامٍ',
+      description: 'يشهد القطاع الدوائي نمواً متسارعاً في المملكة مع التوجه نحو تحقيق الاكتفاء الذاتي من الأدوية والمستلزمات الطبية. تتمركز في المدينة الصناعية بالرياض والسدير، وتضم شركات محلية وعالمية تُنتج طيفاً واسعاً من الأدوية والمستلزمات الطبية.',
+      image: 'sudair_generic_pharma_factory.png',
+      companies: 180, workers: '35K', gdpShare: '8%', exports: '28',
+      growth: '12% سنوياً', investment: '20M+ ريال', returnRate: '18-30%',
+      topCompanies: ['الشركة السعودية للصناعات الدوائية', 'تبوك للأدوية', 'الجبيل للأدوية', 'ريكيت', 'نوفارتيس السعودية'],
+      cities: ['riyadh', 'sudair', 'dammam']
+    },
+    construction: {
+      name: 'مواد البناء والتشييد',
+      tagline: 'دعم مشاريع التطوير العمراني',
+      description: 'تنتشر صناعة مواد البناء في معظم المدن الصناعية السعودية لتلبية الطلب المتزايد على مواد البناء في ظل المشاريع العملاقة. تشمل صناعة الأسمنت والطوب والسيراميك والزجاج والمواد العازلة وغيرها من مواد البناء.',
+      image: 'saudi_construction_materials.png',
+      companies: 650, workers: '95K', gdpShare: '10%', exports: '36',
+      growth: '7.3% سنوياً', investment: '10M+ ريال', returnRate: '12-22%',
+      topCompanies: ['أسمنت العربية', 'سيراميك السعودية', 'الزجاج السعودي', 'الأسمنت السعودي', 'ماعدن للفوسفات'],
+      cities: ['riyadh', 'jeddah', 'hail', 'taif']
+    },
+    logistics: {
+      name: 'اللوجستيات والنقل',
+      tagline: 'ربط المملكة بالأسواق العالمية',
+      description: 'تستفيد المملكة من موقعها الاستراتيجي لتطوير قطاع لوجستي متكامل يربط المدن الصناعية بالموانئ والمطارات وشبكات النقل البري والسككي. يشمل القطاع خدمات التخزين والتوزيع والشحن البحري والجوي والبري.',
+      image: 'dammam_integrated_logistics_hub.png',
+      companies: 320, workers: '75K', gdpShare: '7%', exports: '25',
+      growth: '9.5% سنوياً', investment: '15M+ ريال', returnRate: '14-24%',
+      topCompanies: ['أرامكو للخدمات اللوجستية', 'سابتكو', 'الشركة السعودية للخطوط الحديدية', 'موانئ', 'DHL السعودية'],
+      cities: ['jeddah', 'dammam', 'riyadh']
+    }
+  };
+
+  const ind = industries[industryId] || industries.petrochemicals;
+
+  document.title = ind.name + ' - منصة المدن الصناعية';
+  document.getElementById('industryName').textContent = ind.name;
+  document.getElementById('industryBreadcrumb').textContent = ind.name;
+  document.getElementById('industryTagline').textContent = ind.tagline;
+  document.getElementById('industryDesc').textContent = ind.description;
+  document.getElementById('industryImage').src = ind.image;
+  document.getElementById('industryImage').alt = ind.name;
+  document.getElementById('statCompanies').textContent = ind.companies.toLocaleString('ar-SA');
+  document.getElementById('statWorkers').textContent = ind.workers;
+  document.getElementById('statGdp').textContent = ind.gdpShare;
+  document.getElementById('statExports').textContent = ind.exports;
+  document.getElementById('sidebarGdpShare').textContent = ind.gdpShare;
+  document.getElementById('sidebarGrowth').textContent = ind.growth;
+  document.getElementById('sidebarInvestment').textContent = ind.investment;
+  document.getElementById('sidebarReturn').textContent = ind.returnRate;
+
+  // Companies
+  const companiesGrid = document.getElementById('industryCompaniesGrid');
+  if (companiesGrid) {
+    companiesGrid.innerHTML = ind.topCompanies.map(c => `
+      <div style="background:var(--off-white);border-radius:var(--radius-md);padding:16px;text-align:center;border:1px solid var(--border)">
+        <div style="width:48px;height:48px;background:linear-gradient(135deg,#2C3E50,#34495E);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;margin:0 auto 10px">
+          <i class="fas fa-building" style="color:white;font-size:1.1rem"></i>
+        </div>
+        <div style="font-size:0.85rem;font-weight:700;color:var(--primary)">${c}</div>
+      </div>
+    `).join('');
+  }
+
+  const citiesGrid = document.getElementById('industryCities');
+  if (citiesGrid && typeof CITIES_DATA !== 'undefined') {
+    const relatedCities = CITIES_DATA.filter(c => ind.cities.includes(c.id));
+    citiesGrid.innerHTML = relatedCities.map(c => `
+      <a href="city-details.html?id=${c.id}" style="display:block;border-radius:var(--radius-md);overflow:hidden;border:1px solid var(--border);transition:var(--transition)" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='var(--shadow-md)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+        <img src="${c.image}" alt="${c.name}" style="width:100%;height:120px;object-fit:cover">
+        <div style="padding:14px">
+          <div style="font-weight:700;color:var(--primary);font-size:0.9rem;margin-bottom:3px">${c.name}</div>
+          <div style="font-size:0.78rem;color:var(--gold)">${c.region}</div>
+        </div>
+      </a>
+    `).join('');
+  }
+})();
+</script>
+</body>
+</html>

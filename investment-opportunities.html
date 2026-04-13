@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>فرص الاستثمار - منصة المدن الصناعية</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="animations.css">
+  <link rel="stylesheet" href="responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    .invest-card { background: var(--white); border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border); transition: var(--transition); }
+    .invest-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: rgba(212,175,55,0.3); }
+    .invest-card-img { height: 220px; overflow: hidden; position: relative; }
+    .invest-card-img img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition-slow); }
+    .invest-card:hover .invest-card-img img { transform: scale(1.08); }
+    .invest-card-sector { position: absolute; top: 16px; right: 16px; background: var(--gold); color: white; padding: 4px 14px; border-radius: 100px; font-size: 0.78rem; font-weight: 700; }
+    .invest-card-body { padding: 24px; }
+    .invest-card-footer { padding: 16px 24px; border-top: 1px solid var(--border); display: flex; gap: 12px; }
+    .invest-metric { flex: 1; text-align: center; background: var(--off-white); border-radius: var(--radius-sm); padding: 10px 8px; }
+    .invest-metric .val { font-size: 0.9rem; font-weight: 800; color: var(--gold); }
+    .invest-metric .lbl { font-size: 0.72rem; color: var(--text-light); margin-top: 2px; }
+    .incentive-tag { display: inline-block; padding: 4px 12px; background: rgba(212,175,55,0.1); color: var(--gold); border-radius: 100px; font-size: 0.78rem; font-weight: 600; margin: 3px; border: 1px solid rgba(212,175,55,0.3); }
+    .why-invest-card { background: var(--white); border-radius: var(--radius-lg); padding: 32px; border: 1px solid var(--border); text-align: center; transition: var(--transition); }
+    .why-invest-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: rgba(212,175,55,0.3); }
+    .why-invest-card .icon { width: 72px; height: 72px; background: linear-gradient(135deg, rgba(212,175,55,0.12), rgba(201,169,97,0.08)); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+    .why-invest-card .icon i { font-size: 1.8rem; color: var(--gold); }
+  </style>
+</head>
+<body id="investmentPage">
+
+<div id="pageLoader" class="page-loader"><div class="loader-inner"><div class="loader-logo"><i class="fas fa-chart-line"></i></div><div class="loader-bar"><div class="loader-bar-fill"></div></div><p class="loader-text">فرص الاستثمار</p></div></div>
+
+<header class="site-header" id="siteHeader">
+  <div class="container">
+    <div class="header-inner">
+      <a href="index.html" class="site-logo">
+        <div class="logo-icon"><i class="fas fa-industry"></i></div>
+        <div class="logo-text">
+          <span class="title">منصة المدن الصناعية</span>
+          <span class="subtitle">المملكة العربية السعودية</span>
+        </div>
+      </a>
+      <nav class="main-nav" id="mainNav">
+        <div class="nav-item">
+          <a href="index.html" class="nav-link"><i class="fas fa-home"></i> الرئيسية</a>
+        </div>
+        <div class="nav-item">
+          <a href="industrial-cities.html" class="nav-link"><i class="fas fa-city"></i> المدن الصناعية <i class="fas fa-chevron-down" style="font-size:0.7rem"></i></a>
+          <div class="dropdown-menu">
+            <a href="industrial-cities.html" class="dropdown-item"><i class="fas fa-list"></i> جميع المدن</a>
+            <a href="explore-cities.html" class="dropdown-item"><i class="fas fa-search"></i> استكشاف المدن</a>
+            <a href="compare-cities.html" class="dropdown-item"><i class="fas fa-balance-scale"></i> مقارنة المدن</a>
+            <a href="find-your-city.html" class="dropdown-item"><i class="fas fa-map-pin"></i> ابحث عن مدينتك</a>
+            <a href="industrial-map.html" class="dropdown-item"><i class="fas fa-map"></i> الخريطة التفاعلية</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="industries.html" class="nav-link active"><i class="fas fa-cogs"></i> الصناعات <i class="fas fa-chevron-down" style="font-size:0.7rem"></i></a>
+          <div class="dropdown-menu">
+            <a href="industries.html" class="dropdown-item"><i class="fas fa-industry"></i> قطاعات الصناعة</a>
+            <a href="investment-opportunities.html" class="dropdown-item"><i class="fas fa-chart-line"></i> فرص الاستثمار</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="vision-2030.html" class="nav-link"><i class="fas fa-star"></i> رؤية 2030</a>
+        </div>
+        <div class="nav-item">
+          <a href="economic-statistics.html" class="nav-link"><i class="fas fa-chart-bar"></i> الإحصاءات <i class="fas fa-chevron-down" style="font-size:0.7rem"></i></a>
+          <div class="dropdown-menu">
+            <a href="economic-statistics.html" class="dropdown-item"><i class="fas fa-chart-pie"></i> الإحصاءات الاقتصادية</a>
+            <a href="industrial-timeline.html" class="dropdown-item"><i class="fas fa-history"></i> الجدول الزمني</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="about-platform.html" class="nav-link"><i class="fas fa-info-circle"></i> عن المنصة</a>
+        </div>
+      </nav>
+      <div class="header-actions">
+        <button class="btn-search" id="searchBtn" aria-label="بحث"><i class="fas fa-search"></i></button>
+        <a href="contact.html" class="btn-cta">تواصل معنا</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="القائمة" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div id="searchOverlay"><div class="search-overlay-inner"><div class="search-overlay-bar"><input type="text" id="globalSearchInput" placeholder="ابحث..."><button id="searchClose"><i class="fas fa-times"></i></button></div><div id="searchResults"></div></div></div>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-content">
+      <div class="breadcrumb"><a href="index.html" class="breadcrumb-item">الرئيسية</a><span class="breadcrumb-separator"><i class="fas fa-chevron-left"></i></span><span class="breadcrumb-item">فرص الاستثمار</span></div>
+      <h1 class="page-hero-title">فرص الاستثمار الصناعي</h1>
+      <p class="page-hero-subtitle">اكتشف الفرص الاستثمارية الواعدة في المدن الصناعية السعودية وانضم إلى مسيرة التحول الاقتصادي</p>
+    </div>
+  </div>
+</section>
+
+
+<section class="section-sm" style="background:var(--off-white)">
+  <div class="container">
+    <div class="grid-4">
+      <div class="stat-card"><div class="icon"><i class="fas fa-chart-line"></i></div><div class="number">300</div><div class="label">مليار ريال هدف الاستثمار</div></div>
+      <div class="stat-card"><div class="icon"><i class="fas fa-handshake"></i></div><div class="number">2,400+</div><div class="label">مشروع استثماري</div></div>
+      <div class="stat-card"><div class="icon"><i class="fas fa-percentage"></i></div><div class="number">0%</div><div class="label">ضريبة على الأرباح (مناطق حرة)</div></div>
+      <div class="stat-card"><div class="icon"><i class="fas fa-globe"></i></div><div class="number">100%</div><div class="label">ملكية أجنبية كاملة</div></div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" style="background:var(--white)">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-badge"><i class="fas fa-star"></i> لماذا الاستثمار؟</div>
+      <h2 class="section-title">مزايا الاستثمار في المدن الصناعية السعودية</h2>
+      <div class="title-line"></div>
+    </div>
+    <div class="grid-4 stagger-children">
+      <div class="why-invest-card reveal"><div class="icon"><i class="fas fa-percentage"></i></div><h3 style="font-size:1rem;color:var(--primary);margin-bottom:10px">إعفاءات ضريبية</h3><p style="font-size:0.88rem;color:var(--text-light)">إعفاءات ضريبية تصل إلى 10 سنوات في المناطق الاقتصادية الخاصة</p></div>
+      <div class="why-invest-card reveal delay-100"><div class="icon"><i class="fas fa-file-alt"></i></div><h3 style="font-size:1rem;color:var(--primary);margin-bottom:10px">إجراءات مبسطة</h3><p style="font-size:0.88rem;color:var(--text-light)">تراخيص سريعة وإجراءات مبسطة عبر منصة "استثمر في السعودية"</p></div>
+      <div class="why-invest-card reveal delay-200"><div class="icon"><i class="fas fa-road"></i></div><h3 style="font-size:1rem;color:var(--primary);margin-bottom:10px">بنية تحتية متطورة</h3><p style="font-size:0.88rem;color:var(--text-light)">شبكة متكاملة من الطرق والموانئ والمطارات وشبكات الطاقة</p></div>
+      <div class="why-invest-card reveal delay-300"><div class="icon"><i class="fas fa-users"></i></div><h3 style="font-size:1rem;color:var(--primary);margin-bottom:10px">كوادر بشرية مؤهلة</h3><p style="font-size:0.88rem;color:var(--text-light)">قوى عاملة سعودية مؤهلة مدعومة ببرامج التدريب والتطوير</p></div>
+      <div class="why-invest-card reveal"><div class="icon"><i class="fas fa-globe"></i></div><h3 style="font-size:1rem;color:var(--primary);margin-bottom:10px">موقع استراتيجي</h3><p style="font-size:0.88rem;color:var(--text-light)">بوابة للأسواق الإقليمية والعالمية تربط ثلاث قارات</p></div>
+      <div class="why-invest-card reveal delay-100"><div class="icon"><i class="fas fa-bolt"></i></div><h3 style="font-size:1rem;color:var(--primary);margin-bottom:10px">طاقة بأسعار تنافسية</h3><p style="font-size:0.88rem;color:var(--text-light)">أسعار طاقة تنافسية للمنشآت الصناعية مع دعم حكومي</p></div>
+      <div class="why-invest-card reveal delay-200"><div class="icon"><i class="fas fa-shield-alt"></i></div><h3 style="font-size:1rem;color:var(--primary);margin-bottom:10px">حماية الملكية الفكرية</h3><p style="font-size:0.88rem;color:var(--text-light)">منظومة قانونية متكاملة لحماية حقوق الملكية الفكرية</p></div>
+      <div class="why-invest-card reveal delay-300"><div class="icon"><i class="fas fa-hand-holding-dollar"></i></div><h3 style="font-size:1rem;color:var(--primary);margin-bottom:10px">تمويل ميسر</h3><p style="font-size:0.88rem;color:var(--text-light)">برامج تمويل حكومية وصناديق استثمار داعمة للمشاريع الصناعية</p></div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" style="background:var(--light-bg)">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-badge"><i class="fas fa-chart-line"></i> الفرص الاستثمارية</div>
+      <h2 class="section-title">أبرز فرص الاستثمار</h2>
+      <p class="section-subtitle">فرص استثمارية متنوعة في قطاعات صناعية واعدة</p>
+      <div class="title-line"></div>
+    </div>
+    <div class="grid-3 stagger-children">
+      <div class="invest-card reveal">
+        <div class="invest-card-img"><img src="jubail_integrated_petrochemical_complex.png" alt="بتروكيماويات" loading="lazy"><span class="invest-card-sector">البتروكيماويات</span></div>
+        <div class="invest-card-body">
+          <h3 style="font-size:1rem;color:var(--primary);margin-bottom:10px">مجمع بتروكيماوي متكامل - الجبيل</h3>
+          <p style="font-size:0.85rem;color:var(--text-light);line-height:1.7">فرصة استثمارية لإنشاء مجمع بتروكيماوي متكامل في مدينة الجبيل الصناعية مع توفر المواد الخام والبنية التحتية المتكاملة.</p>
+          <div style="margin-top:16px"><div style="font-size:0.82rem;font-weight:700;color:var(--primary);margin-bottom:8px">الحوافز المتاحة:</div><div><span class="incentive-tag">إعفاء ضريبي 10 سنوات</span><span class="incentive-tag">أرض مدعومة</span><span class="incentive-tag">ربط بالموانئ</span></div></div>
+        </div>
+        <div class="invest-card-footer">
+          <div class="invest-metric"><div class="val">500M+</div><div class="lbl">الحد الأدنى (ريال)</div></div>
+          <div class="invest-metric"><div class="val">18-25%</div><div class="lbl">العائد المتوقع</div></div>
+          <div class="invest-metric"><div class="val">7-10 سنوات</div><div class="lbl">مدة الاسترداد</div></div>
+        </div>
+      </div>
+      <div class="invest-card reveal delay-100">
+        <div class="invest-card-img"><img src="saudi_food_agriculture_industry.png" alt="غذائية" loading="lazy"><span class="invest-card-sector">الصناعات الغذائية</span></div>
+        <div class="invest-card-body">
+          <h3 style="font-size:1rem;color:var(--primary);margin-bottom:10px">مصنع منتجات غذائية متنوعة - الرياض</h3>
+          <p style="font-size:0.85rem;color:var(--text-light);line-height:1.7">فرصة لإنشاء مصنع متكامل للمنتجات الغذائية في المدينة الصناعية بالرياض مع إمكانية التصدير لدول الخليج والمنطقة.</p>
+          <div style="margin-top:16px"><div style="font-size:0.82rem;font-weight:700;color:var(--primary);margin-bottom:8px">الحوافز المتاحة:</div><div><span class="incentive-tag">إعفاء ضريبي 5 سنوات</span><span class="incentive-tag">دعم التصدير</span><span class="incentive-tag">تدريب مجاني</span></div></div>
+        </div>
+        <div class="invest-card-footer">
+          <div class="invest-metric"><div class="val">20M+</div><div class="lbl">الحد الأدنى (ريال)</div></div>
+          <div class="invest-metric"><div class="val">15-22%</div><div class="lbl">العائد المتوقع</div></div>
+          <div class="invest-metric"><div class="val">4-6 سنوات</div><div class="lbl">مدة الاسترداد</div></div>
+        </div>
+      </div>
+      <div class="invest-card reveal delay-200">
+        <div class="invest-card-img"><img src="sudair_generic_pharma_factory.png" alt="دوائية" loading="lazy"><span class="invest-card-sector">الصناعات الدوائية</span></div>
+        <div class="invest-card-body">
+          <h3 style="font-size:1rem;color:var(--primary);margin-bottom:10px">مصنع أدوية جنيسة - السدير</h3>
+          <p style="font-size:0.85rem;color:var(--text-light);line-height:1.7">فرصة استثمارية في قطاع الأدوية الجنيسة المتنامي في المدينة الصناعية بالسدير مع دعم حكومي لتحقيق الاكتفاء الذاتي.</p>
+          <div style="margin-top:16px"><div style="font-size:0.82rem;font-weight:700;color:var(--primary);margin-bottom:8px">الحوافز المتاحة:</div><div><span class="incentive-tag">إعفاء ضريبي 8 سنوات</span><span class="incentive-tag">دعم البحث</span><span class="incentive-tag">ضمان شراء حكومي</span></div></div>
+        </div>
+        <div class="invest-card-footer">
+          <div class="invest-metric"><div class="val">50M+</div><div class="lbl">الحد الأدنى (ريال)</div></div>
+          <div class="invest-metric"><div class="val">20-30%</div><div class="lbl">العائد المتوقع</div></div>
+          <div class="invest-metric"><div class="val">5-8 سنوات</div><div class="lbl">مدة الاسترداد</div></div>
+        </div>
+      </div>
+      <div class="invest-card reveal">
+        <div class="invest-card-img"><img src="saudi_construction_materials.png" alt="بناء" loading="lazy"><span class="invest-card-sector">مواد البناء</span></div>
+        <div class="invest-card-body">
+          <h3 style="font-size:1rem;color:var(--primary);margin-bottom:10px">مصنع مواد بناء متطورة - جدة</h3>
+          <p style="font-size:0.85rem;color:var(--text-light);line-height:1.7">فرصة لإنشاء مصنع مواد بناء متطورة في المدينة الصناعية بجدة لتلبية الطلب المتزايد من مشاريع رؤية 2030.</p>
+          <div style="margin-top:16px"><div style="font-size:0.82rem;font-weight:700;color:var(--primary);margin-bottom:8px">الحوافز المتاحة:</div><div><span class="incentive-tag">إعفاء ضريبي 5 سنوات</span><span class="incentive-tag">قرب من الموانئ</span><span class="incentive-tag">سوق محلي ضخم</span></div></div>
+        </div>
+        <div class="invest-card-footer">
+          <div class="invest-metric"><div class="val">15M+</div><div class="lbl">الحد الأدنى (ريال)</div></div>
+          <div class="invest-metric"><div class="val">14-20%</div><div class="lbl">العائد المتوقع</div></div>
+          <div class="invest-metric"><div class="val">4-7 سنوات</div><div class="lbl">مدة الاسترداد</div></div>
+        </div>
+      </div>
+      <div class="invest-card reveal delay-100">
+        <div class="invest-card-img"><img src="dammam_integrated_logistics_hub.png" alt="لوجستيات" loading="lazy"><span class="invest-card-sector">اللوجستيات</span></div>
+        <div class="invest-card-body">
+          <h3 style="font-size:1rem;color:var(--primary);margin-bottom:10px">مركز لوجستي متكامل - الدمام</h3>
+          <p style="font-size:0.85rem;color:var(--text-light);line-height:1.7">فرصة لإنشاء مركز لوجستي متكامل في المنطقة الشرقية يستفيد من القرب من ميناء الدمام وشبكة الطرق البرية.</p>
+          <div style="margin-top:16px"><div style="font-size:0.82rem;font-weight:700;color:var(--primary);margin-bottom:8px">الحوافز المتاحة:</div><div><span class="incentive-tag">إعفاء جمركي</span><span class="incentive-tag">ربط بالسكك الحديدية</span><span class="incentive-tag">خدمات متكاملة</span></div></div>
+        </div>
+        <div class="invest-card-footer">
+          <div class="invest-metric"><div class="val">30M+</div><div class="lbl">الحد الأدنى (ريال)</div></div>
+          <div class="invest-metric"><div class="val">16-24%</div><div class="lbl">العائد المتوقع</div></div>
+          <div class="invest-metric"><div class="val">5-8 سنوات</div><div class="lbl">مدة الاسترداد</div></div>
+        </div>
+      </div>
+      <div class="invest-card reveal delay-200">
+        <div class="invest-card-img"><img src="sudair_advanced_manufacturing_factory.png" alt="تقنية" loading="lazy"><span class="invest-card-sector">التصنيع المتقدم</span></div>
+        <div class="invest-card-body">
+          <h3 style="font-size:1rem;color:var(--primary);margin-bottom:10px">مصنع تصنيع متقدم - السدير</h3>
+          <p style="font-size:0.85rem;color:var(--text-light);line-height:1.7">فرصة لإنشاء مصنع تصنيع متقدم يعتمد على تقنيات الثورة الصناعية الرابعة في المدينة الصناعية بالسدير.</p>
+          <div style="margin-top:16px"><div style="font-size:0.82rem;font-weight:700;color:var(--primary);margin-bottom:8px">الحوافز المتاحة:</div><div><span class="incentive-tag">إعفاء ضريبي 10 سنوات</span><span class="incentive-tag">دعم التقنية</span><span class="incentive-tag">شراكة حكومية</span></div></div>
+        </div>
+        <div class="invest-card-footer">
+          <div class="invest-metric"><div class="val">100M+</div><div class="lbl">الحد الأدنى (ريال)</div></div>
+          <div class="invest-metric"><div class="val">22-35%</div><div class="lbl">العائد المتوقع</div></div>
+          <div class="invest-metric"><div class="val">6-10 سنوات</div><div class="lbl">مدة الاسترداد</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section style="padding:80px 0;background:linear-gradient(135deg,var(--gold),var(--gold-light))">
+  <div class="container text-center" style="position:relative;z-index:2">
+    <h2 style="color:white;font-size:2rem;margin-bottom:16px">هل أنت مستعد للاستثمار؟</h2>
+    <p style="color:rgba(255,255,255,0.85);margin-bottom:32px;max-width:500px;margin-left:auto;margin-right:auto">تواصل مع فريقنا للحصول على استشارة مجانية وتفاصيل حول الفرص الاستثمارية المناسبة لمشروعك</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+      <a href="contact.html" class="btn" style="background:white;color:#D4AF37;font-weight:800;padding:16px 36px"><i class="fas fa-envelope"></i> تواصل معنا</a>
+      <a href="find-your-city.html" class="btn" style="background:rgba(255,255,255,0.15);color:white;border:2px solid rgba(255,255,255,0.5);padding:16px 36px"><i class="fas fa-compass"></i> ابحث عن مدينتك</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="site-logo">
+          <div class="logo-icon"><i class="fas fa-industry"></i></div>
+          <div class="logo-text">
+            <span class="title">منصة المدن الصناعية</span>
+            <span class="subtitle">المملكة العربية السعودية</span>
+          </div>
+        </a>
+        <p class="footer-desc">منصة متكاملة تجمع المعلومات والبيانات عن المدن الصناعية في المملكة العربية السعودية، وتدعم المستثمرين في اتخاذ قراراتهم الاستثمارية.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-youtube"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>المدن الصناعية</h4>
+        <div class="footer-links">
+          <a href="industrial-cities.html" class="footer-link"><i class="fas fa-chevron-left"></i> جميع المدن</a>
+          <a href="city-details.html?id=jubail" class="footer-link"><i class="fas fa-chevron-left"></i> الجبيل الصناعية</a>
+          <a href="city-details.html?id=yanbu" class="footer-link"><i class="fas fa-chevron-left"></i> ينبع الصناعية</a>
+          <a href="city-details.html?id=jeddah" class="footer-link"><i class="fas fa-chevron-left"></i> جدة الصناعية</a>
+          <a href="city-details.html?id=riyadh" class="footer-link"><i class="fas fa-chevron-left"></i> الرياض الصناعية</a>
+          <a href="industrial-map.html" class="footer-link"><i class="fas fa-chevron-left"></i> الخريطة التفاعلية</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>الاستثمار</h4>
+        <div class="footer-links">
+          <a href="investment-opportunities.html" class="footer-link"><i class="fas fa-chevron-left"></i> فرص الاستثمار</a>
+          <a href="industries.html" class="footer-link"><i class="fas fa-chevron-left"></i> القطاعات الصناعية</a>
+          <a href="vision-2030.html" class="footer-link"><i class="fas fa-chevron-left"></i> رؤية 2030</a>
+          <a href="economic-statistics.html" class="footer-link"><i class="fas fa-chevron-left"></i> الإحصاءات</a>
+          <a href="find-your-city.html" class="footer-link"><i class="fas fa-chevron-left"></i> ابحث عن مدينتك</a>
+          <a href="compare-cities.html" class="footer-link"><i class="fas fa-chevron-left"></i> مقارنة المدن</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>المنصة</h4>
+        <div class="footer-links">
+          <a href="about-platform.html" class="footer-link"><i class="fas fa-chevron-left"></i> عن المنصة</a>
+          <a href="industrial-timeline.html" class="footer-link"><i class="fas fa-chevron-left"></i> الجدول الزمني</a>
+          <a href="contact.html" class="footer-link"><i class="fas fa-chevron-left"></i> تواصل معنا</a>
+        </div>
+        <div style="margin-top:24px;padding:16px;background:rgba(212,175,55,0.1);border-radius:10px;border:1px solid rgba(212,175,55,0.2)">
+          <div style="color:var(--gold);font-weight:700;margin-bottom:8px;font-size:0.9rem"><i class="fas fa-phone-alt"></i> للاستفسار</div>
+          <div style="color:rgba(255,255,255,0.7);font-size:0.85rem">920000000</div>
+          <div style="color:rgba(255,255,255,0.7);font-size:0.85rem;margin-top:4px">info@industrial-sa.gov.sa</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>جميع الحقوق محفوظة 2026 - منصة المدن الصناعية في المملكة العربية السعودية</p>
+      <div class="footer-bottom-links">
+        <a href="#">سياسة الخصوصية</a>
+        <a href="#">شروط الاستخدام</a>
+        <a href="#">إخلاء المسؤولية</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></button>
+<script src="cities.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

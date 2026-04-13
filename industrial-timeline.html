@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الجدول الزمني الصناعي - منصة المدن الصناعية</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="animations.css">
+  <link rel="stylesheet" href="responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    .timeline { position: relative; padding: 40px 0; }
+    .timeline::before { content: ''; position: absolute; top: 0; bottom: 0; right: 50%; transform: translateX(50%); width: 3px; background: linear-gradient(to bottom, var(--gold), var(--primary)); border-radius: 2px; }
+    .timeline-item { display: flex; gap: 40px; margin-bottom: 56px; position: relative; }
+    .timeline-item:nth-child(odd) { flex-direction: row-reverse; }
+    .timeline-item:nth-child(odd) .timeline-content { text-align: right; }
+    .timeline-item:nth-child(even) .timeline-content { text-align: left; }
+    .timeline-content { flex: 1; background: var(--white); border-radius: var(--radius-lg); padding: 28px; border: 1px solid var(--border); box-shadow: var(--shadow-sm); transition: var(--transition); }
+    .timeline-content:hover { box-shadow: var(--shadow-md); border-color: rgba(212,175,55,0.3); }
+    .timeline-center { display: flex; flex-direction: column; align-items: center; gap: 8px; position: relative; z-index: 2; }
+    .timeline-year { background: var(--gold); color: white; padding: 8px 16px; border-radius: 100px; font-weight: 900; font-size: 0.9rem; white-space: nowrap; box-shadow: 0 4px 12px rgba(212,175,55,0.4); }
+    .timeline-dot { width: 20px; height: 20px; background: var(--primary); border-radius: 50%; border: 3px solid var(--gold); }
+    .timeline-content h3 { font-size: 1.05rem; color: var(--primary); margin-bottom: 8px; }
+    .timeline-content p { font-size: 0.88rem; color: var(--text-light); line-height: 1.8; }
+    .timeline-content .event-tag { display: inline-block; padding: 3px 10px; border-radius: 100px; font-size: 0.75rem; font-weight: 700; margin-top: 10px; }
+    .event-tag.founding { background: rgba(212,175,55,0.12); color: var(--gold); border: 1px solid rgba(212,175,55,0.3); }
+    .event-tag.expansion { background: rgba(44,62,80,0.08); color: var(--primary); border: 1px solid rgba(44,62,80,0.2); }
+    .event-tag.milestone { background: rgba(39,174,96,0.1); color: #27ae60; border: 1px solid rgba(39,174,96,0.3); }
+    .event-tag.vision { background: rgba(52,73,94,0.08); color: var(--primary-light); border: 1px solid rgba(52,73,94,0.2); }
+    @media (max-width: 768px) {
+      .timeline::before { right: 20px; }
+      .timeline-item, .timeline-item:nth-child(odd) { flex-direction: column; padding-right: 50px; }
+      .timeline-center { position: absolute; right: 0; top: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="pageLoader" class="page-loader"><div class="loader-inner"><div class="loader-logo"><i class="fas fa-history"></i></div><div class="loader-bar"><div class="loader-bar-fill"></div></div><p class="loader-text">الجدول الزمني</p></div></div>
+
+<header class="site-header" id="siteHeader">
+  <div class="container">
+    <div class="header-inner">
+      <a href="index.html" class="site-logo">
+        <div class="logo-icon"><i class="fas fa-industry"></i></div>
+        <div class="logo-text">
+          <span class="title">منصة المدن الصناعية</span>
+          <span class="subtitle">المملكة العربية السعودية</span>
+        </div>
+      </a>
+      <nav class="main-nav" id="mainNav">
+        <div class="nav-item">
+          <a href="index.html" class="nav-link"><i class="fas fa-home"></i> الرئيسية</a>
+        </div>
+        <div class="nav-item">
+          <a href="industrial-cities.html" class="nav-link"><i class="fas fa-city"></i> المدن الصناعية <i class="fas fa-chevron-down" style="font-size:0.7rem"></i></a>
+          <div class="dropdown-menu">
+            <a href="industrial-cities.html" class="dropdown-item"><i class="fas fa-list"></i> جميع المدن</a>
+            <a href="explore-cities.html" class="dropdown-item"><i class="fas fa-search"></i> استكشاف المدن</a>
+            <a href="compare-cities.html" class="dropdown-item"><i class="fas fa-balance-scale"></i> مقارنة المدن</a>
+            <a href="find-your-city.html" class="dropdown-item"><i class="fas fa-map-pin"></i> ابحث عن مدينتك</a>
+            <a href="industrial-map.html" class="dropdown-item"><i class="fas fa-map"></i> الخريطة التفاعلية</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="industries.html" class="nav-link"><i class="fas fa-cogs"></i> الصناعات <i class="fas fa-chevron-down" style="font-size:0.7rem"></i></a>
+          <div class="dropdown-menu">
+            <a href="industries.html" class="dropdown-item"><i class="fas fa-industry"></i> قطاعات الصناعة</a>
+            <a href="investment-opportunities.html" class="dropdown-item"><i class="fas fa-chart-line"></i> فرص الاستثمار</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="vision-2030.html" class="nav-link"><i class="fas fa-star"></i> رؤية 2030</a>
+        </div>
+        <div class="nav-item">
+          <a href="economic-statistics.html" class="nav-link active"><i class="fas fa-chart-bar"></i> الإحصاءات <i class="fas fa-chevron-down" style="font-size:0.7rem"></i></a>
+          <div class="dropdown-menu">
+            <a href="economic-statistics.html" class="dropdown-item"><i class="fas fa-chart-pie"></i> الإحصاءات الاقتصادية</a>
+            <a href="industrial-timeline.html" class="dropdown-item"><i class="fas fa-history"></i> الجدول الزمني</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="about-platform.html" class="nav-link"><i class="fas fa-info-circle"></i> عن المنصة</a>
+        </div>
+      </nav>
+      <div class="header-actions">
+        <button class="btn-search" id="searchBtn" aria-label="بحث"><i class="fas fa-search"></i></button>
+        <a href="contact.html" class="btn-cta">تواصل معنا</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="القائمة" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div id="searchOverlay"><div class="search-overlay-inner"><div class="search-overlay-bar"><input type="text" id="globalSearchInput" placeholder="ابحث..."><button id="searchClose"><i class="fas fa-times"></i></button></div><div id="searchResults"></div></div></div>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-content">
+      <div class="breadcrumb"><a href="index.html" class="breadcrumb-item">الرئيسية</a><span class="breadcrumb-separator"><i class="fas fa-chevron-left"></i></span><span class="breadcrumb-item">الجدول الزمني الصناعي</span></div>
+      <h1 class="page-hero-title">الجدول الزمني الصناعي</h1>
+      <p class="page-hero-subtitle">مسيرة التطور الصناعي في المملكة العربية السعودية عبر العقود</p>
+    </div>
+  </div>
+</section>
+
+<section class="section-sm" style="background:var(--off-white)">
+  <div class="container">
+    <div class="grid-4">
+      <div class="stat-card"><div class="icon"><i class="fas fa-calendar-alt"></i></div><div class="number">50+</div><div class="label">عاماً من التطور الصناعي</div></div>
+      <div class="stat-card"><div class="icon"><i class="fas fa-city"></i></div><div class="number">36</div><div class="label">مدينة صناعية</div></div>
+      <div class="stat-card"><div class="icon"><i class="fas fa-building"></i></div><div class="number">9,500+</div><div class="label">منشأة صناعية</div></div>
+      <div class="stat-card"><div class="icon"><i class="fas fa-flag"></i></div><div class="number">2030</div><div class="label">رؤية المملكة</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-badge"><i class="fas fa-history"></i> التاريخ الصناعي</div>
+      <h2 class="section-title">مسيرة التطور الصناعي</h2>
+      <p class="section-subtitle">رحلة المملكة العربية السعودية نحو التنويع الاقتصادي والتحول الصناعي</p>
+      <div class="title-line"></div>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item reveal">
+        <div class="timeline-content">
+          <h3>تأسيس الهيئة السعودية للمدن الصناعية</h3>
+          <p>تأسست المؤسسة العامة للمناطق الصناعية (مدن) لتطوير وإدارة المدن الصناعية في المملكة وتوفير بنية تحتية متكاملة للمستثمرين.</p>
+          <span class="event-tag founding">تأسيس</span>
+        </div>
+        <div class="timeline-center"><div class="timeline-year">1975</div><div class="timeline-dot"></div></div>
+        <div style="flex:1"></div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div style="flex:1"></div>
+        <div class="timeline-center"><div class="timeline-year">1975</div><div class="timeline-dot"></div></div>
+        <div class="timeline-content">
+          <h3>إنشاء مدينة الجبيل الصناعية</h3>
+          <p>انطلق مشروع مدينة الجبيل الصناعية الذي يُعد من أضخم المشاريع الصناعية في العالم، ليصبح قطب البتروكيماويات الرئيسي في المملكة.</p>
+          <span class="event-tag founding">تأسيس</span>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-content">
+          <h3>إنشاء مدينة ينبع الصناعية</h3>
+          <p>أُنشئت مدينة ينبع الصناعية على ساحل البحر الأحمر لتكون مركزاً صناعياً متكاملاً يخدم غرب المملكة ويدعم صناعة تكرير النفط والبتروكيماويات.</p>
+          <span class="event-tag founding">تأسيس</span>
+        </div>
+        <div class="timeline-center"><div class="timeline-year">1976</div><div class="timeline-dot"></div></div>
+        <div style="flex:1"></div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div style="flex:1"></div>
+        <div class="timeline-center"><div class="timeline-year">1985</div><div class="timeline-dot"></div></div>
+        <div class="timeline-content">
+          <h3>اكتمال المرحلة الأولى من الجبيل</h3>
+          <p>اكتملت المرحلة الأولى من مدينة الجبيل الصناعية مع تشغيل أولى المصانع الكبرى وبدء الإنتاج التجاري للبتروكيماويات.</p>
+          <span class="event-tag milestone">إنجاز</span>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-content">
+          <h3>توسع المدن الصناعية الإقليمية</h3>
+          <p>انطلق برنامج إنشاء المدن الصناعية في مختلف مناطق المملكة لتوزيع التنمية الصناعية جغرافياً وتحقيق التوازن الإقليمي.</p>
+          <span class="event-tag expansion">توسع</span>
+        </div>
+        <div class="timeline-center"><div class="timeline-year">1990</div><div class="timeline-dot"></div></div>
+        <div style="flex:1"></div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div style="flex:1"></div>
+        <div class="timeline-center"><div class="timeline-year">2001</div><div class="timeline-dot"></div></div>
+        <div class="timeline-content">
+          <h3>إنشاء مدينة السدير الصناعية</h3>
+          <p>تأسست مدينة السدير الصناعية لتكون مركزاً صناعياً متخصصاً يخدم منطقة القصيم ووسط المملكة بمساحة تتجاوز 225 كيلومتراً مربعاً.</p>
+          <span class="event-tag founding">تأسيس</span>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-content">
+          <h3>إطلاق برنامج التخصيص الصناعي</h3>
+          <p>أطلقت المملكة برنامجاً شاملاً لتخصيص المدن الصناعية وتطوير الشراكات مع القطاع الخاص لرفع كفاءة التشغيل وتحسين جودة الخدمات.</p>
+          <span class="event-tag expansion">توسع</span>
+        </div>
+        <div class="timeline-center"><div class="timeline-year">2010</div><div class="timeline-dot"></div></div>
+        <div style="flex:1"></div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div style="flex:1"></div>
+        <div class="timeline-center"><div class="timeline-year">2016</div><div class="timeline-dot"></div></div>
+        <div class="timeline-content">
+          <h3>إطلاق رؤية المملكة 2030</h3>
+          <p>أطلق ولي العهد الأمير محمد بن سلمان رؤية المملكة 2030 التي جعلت من التنويع الاقتصادي والتطوير الصناعي ركيزة أساسية للتحول الوطني.</p>
+          <span class="event-tag vision">رؤية 2030</span>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-content">
+          <h3>إطلاق برنامج تطوير الصناعة الوطنية</h3>
+          <p>أُطلق برنامج تطوير الصناعة الوطنية والخدمات اللوجستية (NIDLP) بهدف رفع مساهمة الصناعة في الناتج المحلي وتحقيق مستهدفات رؤية 2030.</p>
+          <span class="event-tag vision">رؤية 2030</span>
+        </div>
+        <div class="timeline-center"><div class="timeline-year">2019</div><div class="timeline-dot"></div></div>
+        <div style="flex:1"></div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div style="flex:1"></div>
+        <div class="timeline-center"><div class="timeline-year">2021</div><div class="timeline-dot"></div></div>
+        <div class="timeline-content">
+          <h3>إطلاق المناطق الاقتصادية الخاصة</h3>
+          <p>أعلنت المملكة عن إنشاء مناطق اقتصادية خاصة تتمتع بحوافز استثمارية استثنائية لاستقطاب الاستثمارات الأجنبية وتطوير صناعات متخصصة.</p>
+          <span class="event-tag milestone">إنجاز</span>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-content">
+          <h3>إطلاق مبادرة "صنع في السعودية"</h3>
+          <p>أُطلقت مبادرة "صنع في السعودية" لتعزيز المحتوى المحلي ودعم المنتجات الصناعية السعودية في الأسواق المحلية والعالمية.</p>
+          <span class="event-tag vision">رؤية 2030</span>
+        </div>
+        <div class="timeline-center"><div class="timeline-year">2022</div><div class="timeline-dot"></div></div>
+        <div style="flex:1"></div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div style="flex:1"></div>
+        <div class="timeline-center"><div class="timeline-year">2025</div><div class="timeline-dot"></div></div>
+        <div class="timeline-content">
+          <h3>تجاوز 9,500 منشأة صناعية</h3>
+          <p>وصل عدد المنشآت الصناعية في المدن الصناعية السعودية إلى أكثر من 9,500 منشأة توظف أكثر من 850,000 عامل وتُنتج ما قيمته 960 مليار ريال سنوياً.</p>
+          <span class="event-tag milestone">إنجاز</span>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-content">
+          <h3>المستهدف: تحقيق رؤية 2030</h3>
+          <p>يستهدف القطاع الصناعي السعودي رفع مساهمته في الناتج المحلي إلى 25% وتوظيف 1.5 مليون عامل سعودي وتحقيق صادرات غير نفطية بقيمة 500 مليار ريال.</p>
+          <span class="event-tag vision">رؤية 2030</span>
+        </div>
+        <div class="timeline-center"><div class="timeline-year">2030</div><div class="timeline-dot"></div></div>
+        <div style="flex:1"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:80px 0;background:var(--primary)">
+  <div class="container text-center">
+    <h2 style="color:white;margin-bottom:16px">كن جزءاً من هذا التاريخ</h2>
+    <p style="color:rgba(255,255,255,0.7);margin-bottom:32px;max-width:500px;margin-left:auto;margin-right:auto">استثمر في المدن الصناعية السعودية وساهم في صنع مستقبل صناعي مشرق</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+      <a href="investment-opportunities.html" class="btn btn-primary btn-lg"><i class="fas fa-chart-line"></i> فرص الاستثمار</a>
+      <a href="vision-2030.html" class="btn btn-outline btn-lg"><i class="fas fa-star"></i> رؤية 2030</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="site-logo">
+          <div class="logo-icon"><i class="fas fa-industry"></i></div>
+          <div class="logo-text">
+            <span class="title">منصة المدن الصناعية</span>
+            <span class="subtitle">المملكة العربية السعودية</span>
+          </div>
+        </a>
+        <p class="footer-desc">منصة متكاملة تجمع المعلومات والبيانات عن المدن الصناعية في المملكة العربية السعودية، وتدعم المستثمرين في اتخاذ قراراتهم الاستثمارية.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-youtube"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>المدن الصناعية</h4>
+        <div class="footer-links">
+          <a href="industrial-cities.html" class="footer-link"><i class="fas fa-chevron-left"></i> جميع المدن</a>
+          <a href="city-details.html?id=jubail" class="footer-link"><i class="fas fa-chevron-left"></i> الجبيل الصناعية</a>
+          <a href="city-details.html?id=yanbu" class="footer-link"><i class="fas fa-chevron-left"></i> ينبع الصناعية</a>
+          <a href="city-details.html?id=jeddah" class="footer-link"><i class="fas fa-chevron-left"></i> جدة الصناعية</a>
+          <a href="city-details.html?id=riyadh" class="footer-link"><i class="fas fa-chevron-left"></i> الرياض الصناعية</a>
+          <a href="industrial-map.html" class="footer-link"><i class="fas fa-chevron-left"></i> الخريطة التفاعلية</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>الاستثمار</h4>
+        <div class="footer-links">
+          <a href="investment-opportunities.html" class="footer-link"><i class="fas fa-chevron-left"></i> فرص الاستثمار</a>
+          <a href="industries.html" class="footer-link"><i class="fas fa-chevron-left"></i> القطاعات الصناعية</a>
+          <a href="vision-2030.html" class="footer-link"><i class="fas fa-chevron-left"></i> رؤية 2030</a>
+          <a href="economic-statistics.html" class="footer-link"><i class="fas fa-chevron-left"></i> الإحصاءات</a>
+          <a href="find-your-city.html" class="footer-link"><i class="fas fa-chevron-left"></i> ابحث عن مدينتك</a>
+          <a href="compare-cities.html" class="footer-link"><i class="fas fa-chevron-left"></i> مقارنة المدن</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>المنصة</h4>
+        <div class="footer-links">
+          <a href="about-platform.html" class="footer-link"><i class="fas fa-chevron-left"></i> عن المنصة</a>
+          <a href="industrial-timeline.html" class="footer-link"><i class="fas fa-chevron-left"></i> الجدول الزمني</a>
+          <a href="contact.html" class="footer-link"><i class="fas fa-chevron-left"></i> تواصل معنا</a>
+        </div>
+        <div style="margin-top:24px;padding:16px;background:rgba(212,175,55,0.1);border-radius:10px;border:1px solid rgba(212,175,55,0.2)">
+          <div style="color:var(--gold);font-weight:700;margin-bottom:8px;font-size:0.9rem"><i class="fas fa-phone-alt"></i> للاستفسار</div>
+          <div style="color:rgba(255,255,255,0.7);font-size:0.85rem">920000000</div>
+          <div style="color:rgba(255,255,255,0.7);font-size:0.85rem;margin-top:4px">info@industrial-sa.gov.sa</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>جميع الحقوق محفوظة 2026 - منصة المدن الصناعية في المملكة العربية السعودية</p>
+      <div class="footer-bottom-links">
+        <a href="#">سياسة الخصوصية</a>
+        <a href="#">شروط الاستخدام</a>
+        <a href="#">إخلاء المسؤولية</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></button>
+<script src="cities.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
