@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تواصل معنا - منصة المدن الصناعية</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="animations.css">
+  <link rel="stylesheet" href="responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    .contact-form-card { background: var(--white); border-radius: var(--radius-lg); padding: 40px; border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; font-size: 0.85rem; font-weight: 700; color: var(--primary); margin-bottom: 8px; }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px 16px; border: 2px solid var(--border); border-radius: var(--radius-sm); font-family: inherit; font-size: 0.95rem; color: var(--text-medium); background: var(--off-white); outline: none; transition: var(--transition); }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--gold); background: white; box-shadow: 0 0 0 3px rgba(212,175,55,0.1); }
+    .form-group textarea { resize: vertical; min-height: 140px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .contact-info-card { background: var(--primary); border-radius: var(--radius-lg); padding: 36px; color: white; height: fit-content; }
+    .contact-info-item { display: flex; gap: 16px; align-items: flex-start; margin-bottom: 28px; }
+    .contact-info-item:last-child { margin-bottom: 0; }
+    .contact-info-icon { width: 48px; height: 48px; background: rgba(212,175,55,0.2); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .contact-info-icon i { color: var(--gold); font-size: 1.2rem; }
+    .contact-info-text h4 { color: white; font-size: 0.9rem; margin-bottom: 4px; }
+    .contact-info-text p { color: rgba(255,255,255,0.7); font-size: 0.85rem; }
+    .social-links { display: flex; gap: 12px; margin-top: 28px; }
+    .social-link { width: 44px; height: 44px; background: rgba(255,255,255,0.1); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; color: white; transition: var(--transition); }
+    .social-link:hover { background: var(--gold); }
+    .faq-item { background: var(--white); border-radius: var(--radius-md); border: 1px solid var(--border); overflow: hidden; margin-bottom: 12px; }
+    .faq-question { padding: 18px 24px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: 700; color: var(--primary); font-size: 0.95rem; }
+    .faq-question:hover { background: var(--off-white); }
+    .faq-answer { padding: 0 24px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; font-size: 0.88rem; color: var(--text-light); line-height: 1.8; }
+    .faq-item.open .faq-answer { max-height: 200px; padding: 0 24px 18px; }
+    .faq-item.open .faq-icon { transform: rotate(180deg); }
+    .faq-icon { transition: transform 0.3s ease; color: var(--gold); }
+    .success-msg { display: none; background: rgba(39,174,96,0.1); border: 1px solid rgba(39,174,96,0.3); border-radius: var(--radius-md); padding: 16px 20px; color: #27ae60; font-weight: 600; margin-top: 16px; text-align: center; }
+  </style>
+</head>
+<body>
+
+<div id="pageLoader" class="page-loader"><div class="loader-inner"><div class="loader-logo"><i class="fas fa-envelope"></i></div><div class="loader-bar"><div class="loader-bar-fill"></div></div><p class="loader-text">تواصل معنا</p></div></div>
+
+<header class="site-header" id="siteHeader">
+  <div class="container">
+    <div class="header-inner">
+      <a href="index.html" class="site-logo">
+        <div class="logo-icon"><i class="fas fa-industry"></i></div>
+        <div class="logo-text">
+          <span class="title">منصة المدن الصناعية</span>
+          <span class="subtitle">المملكة العربية السعودية</span>
+        </div>
+      </a>
+      <nav class="main-nav" id="mainNav">
+        <div class="nav-item">
+          <a href="index.html" class="nav-link"><i class="fas fa-home"></i> الرئيسية</a>
+        </div>
+        <div class="nav-item">
+          <a href="industrial-cities.html" class="nav-link"><i class="fas fa-city"></i> المدن الصناعية <i class="fas fa-chevron-down" style="font-size:0.7rem"></i></a>
+          <div class="dropdown-menu">
+            <a href="industrial-cities.html" class="dropdown-item"><i class="fas fa-list"></i> جميع المدن</a>
+            <a href="explore-cities.html" class="dropdown-item"><i class="fas fa-search"></i> استكشاف المدن</a>
+            <a href="compare-cities.html" class="dropdown-item"><i class="fas fa-balance-scale"></i> مقارنة المدن</a>
+            <a href="find-your-city.html" class="dropdown-item"><i class="fas fa-map-pin"></i> ابحث عن مدينتك</a>
+            <a href="industrial-map.html" class="dropdown-item"><i class="fas fa-map"></i> الخريطة التفاعلية</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="industries.html" class="nav-link"><i class="fas fa-cogs"></i> الصناعات <i class="fas fa-chevron-down" style="font-size:0.7rem"></i></a>
+          <div class="dropdown-menu">
+            <a href="industries.html" class="dropdown-item"><i class="fas fa-industry"></i> قطاعات الصناعة</a>
+            <a href="investment-opportunities.html" class="dropdown-item"><i class="fas fa-chart-line"></i> فرص الاستثمار</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="vision-2030.html" class="nav-link"><i class="fas fa-star"></i> رؤية 2030</a>
+        </div>
+        <div class="nav-item">
+          <a href="economic-statistics.html" class="nav-link"><i class="fas fa-chart-bar"></i> الإحصاءات <i class="fas fa-chevron-down" style="font-size:0.7rem"></i></a>
+          <div class="dropdown-menu">
+            <a href="economic-statistics.html" class="dropdown-item"><i class="fas fa-chart-pie"></i> الإحصاءات الاقتصادية</a>
+            <a href="industrial-timeline.html" class="dropdown-item"><i class="fas fa-history"></i> الجدول الزمني</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="about-platform.html" class="nav-link"><i class="fas fa-info-circle"></i> عن المنصة</a>
+        </div>
+      </nav>
+      <div class="header-actions">
+        <button class="btn-search" id="searchBtn" aria-label="بحث"><i class="fas fa-search"></i></button>
+        <a href="contact.html" class="btn-cta">تواصل معنا</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="القائمة" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div id="searchOverlay"><div class="search-overlay-inner"><div class="search-overlay-bar"><input type="text" id="globalSearchInput" placeholder="ابحث..."><button id="searchClose"><i class="fas fa-times"></i></button></div><div id="searchResults"></div></div></div>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-content">
+      <div class="breadcrumb"><a href="index.html" class="breadcrumb-item">الرئيسية</a><span class="breadcrumb-separator"><i class="fas fa-chevron-left"></i></span><span class="breadcrumb-item">تواصل معنا</span></div>
+      <h1 class="page-hero-title">تواصل معنا</h1>
+      <p class="page-hero-subtitle">نحن هنا للإجابة على استفساراتك ومساعدتك في الحصول على المعلومات التي تحتاجها</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 360px;gap:40px;align-items:start">
+      <div class="contact-form-card reveal">
+        <h3 style="font-size:1.2rem;color:var(--primary);margin-bottom:8px">أرسل رسالتك</h3>
+        <p style="font-size:0.88rem;color:var(--text-light);margin-bottom:28px">سنرد على رسالتك في أقرب وقت ممكن</p>
+        <form id="contactForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label><i class="fas fa-user"></i> الاسم الكامل</label>
+              <input type="text" placeholder="أدخل اسمك الكامل" required>
+            </div>
+            <div class="form-group">
+              <label><i class="fas fa-envelope"></i> البريد الإلكتروني</label>
+              <input type="email" placeholder="example@email.com" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label><i class="fas fa-phone"></i> رقم الهاتف</label>
+              <input type="tel" placeholder="+966 5X XXX XXXX">
+            </div>
+            <div class="form-group">
+              <label><i class="fas fa-building"></i> الجهة / الشركة</label>
+              <input type="text" placeholder="اسم الشركة أو الجهة">
+            </div>
+          </div>
+          <div class="form-group">
+            <label><i class="fas fa-tag"></i> موضوع الرسالة</label>
+            <select>
+              <option value="">اختر موضوع الرسالة</option>
+              <option>استفسار عن مدينة صناعية</option>
+              <option>فرص الاستثمار</option>
+              <option>معلومات عن الصناعات</option>
+              <option>شراكات وتعاون</option>
+              <option>اقتراحات وملاحظات</option>
+              <option>أخرى</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label><i class="fas fa-comment"></i> نص الرسالة</label>
+            <textarea placeholder="اكتب رسالتك هنا..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg w-full" style="justify-content:center"><i class="fas fa-paper-plane"></i> إرسال الرسالة</button>
+          <div class="success-msg" id="successMsg"><i class="fas fa-check-circle"></i> تم إرسال رسالتك بنجاح! سنتواصل معك قريباً.</div>
+        </form>
+      </div>
+
+      <div>
+        <div class="contact-info-card reveal delay-100">
+          <h3 style="color:white;margin-bottom:24px;font-size:1.1rem">معلومات التواصل</h3>
+          <div class="contact-info-item">
+            <div class="contact-info-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div class="contact-info-text"><h4>العنوان</h4><p>الرياض، المملكة العربية السعودية</p></div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-info-icon"><i class="fas fa-envelope"></i></div>
+            <div class="contact-info-text"><h4>البريد الإلكتروني</h4><p>info@industrial-cities.sa</p></div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-info-icon"><i class="fas fa-phone"></i></div>
+            <div class="contact-info-text"><h4>الهاتف</h4><p>+966 11 XXX XXXX</p></div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-info-icon"><i class="fas fa-clock"></i></div>
+            <div class="contact-info-text"><h4>ساعات العمل</h4><p>الأحد - الخميس: 8 صباحاً - 5 مساءً</p></div>
+          </div>
+          <div class="social-links">
+            <a href="#" class="social-link" title="تويتر"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link" title="لينكدإن"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="social-link" title="يوتيوب"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="social-link" title="إنستغرام"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--light-bg)">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-badge"><i class="fas fa-question-circle"></i> الأسئلة الشائعة</div>
+      <h2 class="section-title">أسئلة متكررة</h2>
+      <div class="title-line"></div>
+    </div>
+    <div style="max-width:800px;margin:0 auto">
+      <div class="faq-item reveal">
+        <div class="faq-question">كيف يمكنني الاستثمار في المدن الصناعية السعودية؟<i class="fas fa-chevron-down faq-icon"></i></div>
+        <div class="faq-answer">يمكنك البدء بزيارة صفحة فرص الاستثمار في منصتنا، ثم التواصل مع هيئة المدن الصناعية (مدن) أو هيئة الاستثمار السعودية للحصول على التفاصيل والإجراءات اللازمة.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-question">ما هي الحوافز المتاحة للمستثمرين الأجانب؟<i class="fas fa-chevron-down faq-icon"></i></div>
+        <div class="faq-answer">تُقدم المملكة حوافز متعددة تشمل الإعفاءات الضريبية، وتوفير الأراضي المدعومة، وتسهيل الإجراءات، وإمكانية التملك الأجنبي الكامل في معظم القطاعات، خاصة في المناطق الاقتصادية الخاصة.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-question">كيف أختار المدينة الصناعية المناسبة لمشروعي؟<i class="fas fa-chevron-down faq-icon"></i></div>
+        <div class="faq-answer">يمكنك استخدام أداة "ابحث عن مدينتك" في منصتنا التي تساعدك في اختيار المدينة الأنسب بناءً على قطاع صناعتك والموقع الجغرافي وحجم الاستثمار.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-question">هل البيانات في المنصة محدثة وموثوقة؟<i class="fas fa-chevron-down faq-icon"></i></div>
+        <div class="faq-answer">نعم، تستند منصتنا في بياناتها إلى المصادر الرسمية الموثوقة مثل هيئة المدن الصناعية (مدن) ووزارة الصناعة والثروة المعدنية وهيئة الاستثمار السعودية.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-question">ما هي خدمات المنصة المتاحة مجاناً؟<i class="fas fa-chevron-down faq-icon"></i></div>
+        <div class="faq-answer">جميع خدمات المنصة متاحة مجاناً للجميع، بما فيها الخريطة التفاعلية وأداة مقارنة المدن ومساعد اختيار المدينة والإحصاءات الاقتصادية.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="site-logo">
+          <div class="logo-icon"><i class="fas fa-industry"></i></div>
+          <div class="logo-text">
+            <span class="title">منصة المدن الصناعية</span>
+            <span class="subtitle">المملكة العربية السعودية</span>
+          </div>
+        </a>
+        <p class="footer-desc">منصة متكاملة تجمع المعلومات والبيانات عن المدن الصناعية في المملكة العربية السعودية، وتدعم المستثمرين في اتخاذ قراراتهم الاستثمارية.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-youtube"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>المدن الصناعية</h4>
+        <div class="footer-links">
+          <a href="industrial-cities.html" class="footer-link"><i class="fas fa-chevron-left"></i> جميع المدن</a>
+          <a href="city-details.html?id=jubail" class="footer-link"><i class="fas fa-chevron-left"></i> الجبيل الصناعية</a>
+          <a href="city-details.html?id=yanbu" class="footer-link"><i class="fas fa-chevron-left"></i> ينبع الصناعية</a>
+          <a href="city-details.html?id=jeddah" class="footer-link"><i class="fas fa-chevron-left"></i> جدة الصناعية</a>
+          <a href="city-details.html?id=riyadh" class="footer-link"><i class="fas fa-chevron-left"></i> الرياض الصناعية</a>
+          <a href="industrial-map.html" class="footer-link"><i class="fas fa-chevron-left"></i> الخريطة التفاعلية</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>الاستثمار</h4>
+        <div class="footer-links">
+          <a href="investment-opportunities.html" class="footer-link"><i class="fas fa-chevron-left"></i> فرص الاستثمار</a>
+          <a href="industries.html" class="footer-link"><i class="fas fa-chevron-left"></i> القطاعات الصناعية</a>
+          <a href="vision-2030.html" class="footer-link"><i class="fas fa-chevron-left"></i> رؤية 2030</a>
+          <a href="economic-statistics.html" class="footer-link"><i class="fas fa-chevron-left"></i> الإحصاءات</a>
+          <a href="find-your-city.html" class="footer-link"><i class="fas fa-chevron-left"></i> ابحث عن مدينتك</a>
+          <a href="compare-cities.html" class="footer-link"><i class="fas fa-chevron-left"></i> مقارنة المدن</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>المنصة</h4>
+        <div class="footer-links">
+          <a href="about-platform.html" class="footer-link"><i class="fas fa-chevron-left"></i> عن المنصة</a>
+          <a href="industrial-timeline.html" class="footer-link"><i class="fas fa-chevron-left"></i> الجدول الزمني</a>
+          <a href="contact.html" class="footer-link"><i class="fas fa-chevron-left"></i> تواصل معنا</a>
+        </div>
+        <div style="margin-top:24px;padding:16px;background:rgba(212,175,55,0.1);border-radius:10px;border:1px solid rgba(212,175,55,0.2)">
+          <div style="color:var(--gold);font-weight:700;margin-bottom:8px;font-size:0.9rem"><i class="fas fa-phone-alt"></i> للاستفسار</div>
+          <div style="color:rgba(255,255,255,0.7);font-size:0.85rem">920000000</div>
+          <div style="color:rgba(255,255,255,0.7);font-size:0.85rem;margin-top:4px">info@industrial-sa.gov.sa</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>جميع الحقوق محفوظة 2026 - منصة المدن الصناعية في المملكة العربية السعودية</p>
+      <div class="footer-bottom-links">
+        <a href="#">سياسة الخصوصية</a>
+        <a href="#">شروط الاستخدام</a>
+        <a href="#">إخلاء المسؤولية</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></button>
+<script src="cities.js"></script>
+<script src="main.js"></script>
+<script>
+document.querySelectorAll('.faq-question').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+
+document.getElementById('contactForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const btn = e.target.querySelector('button[type="submit"]');
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
+  btn.disabled = true;
+  setTimeout(() => {
+    btn.innerHTML = '<i class="fas fa-check"></i> تم الإرسال';
+    document.getElementById('successMsg').style.display = 'block';
+    e.target.reset();
+    setTimeout(() => {
+      btn.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال الرسالة';
+      btn.disabled = false;
+      document.getElementById('successMsg').style.display = 'none';
+    }, 4000);
+  }, 1500);
+});
+</script>
+</body>
+</html>

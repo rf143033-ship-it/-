@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تفاصيل المدينة - منصة المدن الصناعية</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="animations.css">
+  <link rel="stylesheet" href="responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    .city-hero { min-height: 70vh; display: flex; align-items: flex-end; position: relative; overflow: hidden; background: var(--primary); }
+    .city-hero-bg { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0.3; }
+    .city-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(44,62,80,0.98) 0%, rgba(44,62,80,0.6) 50%, rgba(44,62,80,0.3) 100%); }
+    .city-hero-content { position: relative; z-index: 2; padding: 60px 0 80px; width: 100%; }
+    .city-details-layout { display: flex; gap: 40px; align-items: flex-start; }
+    .city-main-content { flex: 1; min-width: 0; }
+    .city-sidebar { width: 340px; flex-shrink: 0; position: sticky; top: 100px; }
+    .sidebar-card { background: var(--white); border-radius: var(--radius-lg); padding: 28px; border: 1px solid var(--border); margin-bottom: 24px; box-shadow: var(--shadow-sm); }
+    .sidebar-card h4 { font-size: 1rem; color: var(--primary); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 8px; }
+    .sidebar-card h4 i { color: var(--gold); }
+    .info-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 0.88rem; }
+    .info-row:last-child { border-bottom: none; }
+    .info-row .label { color: var(--text-light); }
+    .info-row .value { font-weight: 700; color: var(--primary); }
+    .content-section { background: var(--white); border-radius: var(--radius-lg); padding: 36px; border: 1px solid var(--border); margin-bottom: 28px; box-shadow: var(--shadow-sm); }
+    .content-section h3 { font-size: 1.2rem; color: var(--primary); margin-bottom: 20px; padding-bottom: 14px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+    .content-section h3 i { color: var(--gold); }
+    .city-stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+    .city-stat-item { background: var(--off-white); border-radius: var(--radius-md); padding: 20px; text-align: center; border: 1px solid var(--border); }
+    .city-stat-item .val { font-size: 1.5rem; font-weight: 900; color: var(--gold); margin-bottom: 4px; }
+    .city-stat-item .lbl { font-size: 0.78rem; color: var(--text-light); }
+    @media (max-width: 991px) { .city-details-layout { flex-direction: column; } .city-sidebar { width: 100%; position: static; } .city-stats-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 575px) { .city-stats-grid { grid-template-columns: 1fr 1fr; } }
+  </style>
+</head>
+<body id="cityDetailsPage">
+
+<div id="pageLoader" class="page-loader">
+  <div class="loader-inner">
+    <div class="loader-logo"><i class="fas fa-industry"></i></div>
+    <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+    <p class="loader-text">تفاصيل المدينة</p>
+  </div>
+</div>
+
+<header class="site-header" id="siteHeader">
+  <div class="container">
+    <div class="header-inner">
+      <a href="index.html" class="site-logo">
+        <div class="logo-icon"><i class="fas fa-industry"></i></div>
+        <div class="logo-text">
+          <span class="title">منصة المدن الصناعية</span>
+          <span class="subtitle">المملكة العربية السعودية</span>
+        </div>
+      </a>
+      <nav class="main-nav" id="mainNav">
+        <div class="nav-item">
+          <a href="index.html" class="nav-link"><i class="fas fa-home"></i> الرئيسية</a>
+        </div>
+        <div class="nav-item">
+          <a href="industrial-cities.html" class="nav-link active"><i class="fas fa-city"></i> المدن الصناعية <i class="fas fa-chevron-down" style="font-size:0.7rem"></i></a>
+          <div class="dropdown-menu">
+            <a href="industrial-cities.html" class="dropdown-item"><i class="fas fa-list"></i> جميع المدن</a>
+            <a href="explore-cities.html" class="dropdown-item"><i class="fas fa-search"></i> استكشاف المدن</a>
+            <a href="compare-cities.html" class="dropdown-item"><i class="fas fa-balance-scale"></i> مقارنة المدن</a>
+            <a href="find-your-city.html" class="dropdown-item"><i class="fas fa-map-pin"></i> ابحث عن مدينتك</a>
+            <a href="industrial-map.html" class="dropdown-item"><i class="fas fa-map"></i> الخريطة التفاعلية</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="industries.html" class="nav-link"><i class="fas fa-cogs"></i> الصناعات <i class="fas fa-chevron-down" style="font-size:0.7rem"></i></a>
+          <div class="dropdown-menu">
+            <a href="industries.html" class="dropdown-item"><i class="fas fa-industry"></i> قطاعات الصناعة</a>
+            <a href="investment-opportunities.html" class="dropdown-item"><i class="fas fa-chart-line"></i> فرص الاستثمار</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="vision-2030.html" class="nav-link"><i class="fas fa-star"></i> رؤية 2030</a>
+        </div>
+        <div class="nav-item">
+          <a href="economic-statistics.html" class="nav-link"><i class="fas fa-chart-bar"></i> الإحصاءات <i class="fas fa-chevron-down" style="font-size:0.7rem"></i></a>
+          <div class="dropdown-menu">
+            <a href="economic-statistics.html" class="dropdown-item"><i class="fas fa-chart-pie"></i> الإحصاءات الاقتصادية</a>
+            <a href="industrial-timeline.html" class="dropdown-item"><i class="fas fa-history"></i> الجدول الزمني</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="about-platform.html" class="nav-link"><i class="fas fa-info-circle"></i> عن المنصة</a>
+        </div>
+      </nav>
+      <div class="header-actions">
+        <button class="btn-search" id="searchBtn" aria-label="بحث"><i class="fas fa-search"></i></button>
+        <a href="contact.html" class="btn-cta">تواصل معنا</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="القائمة" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div id="searchOverlay"><div class="search-overlay-inner"><div class="search-overlay-bar"><input type="text" id="globalSearchInput" placeholder="ابحث..."><button id="searchClose"><i class="fas fa-times"></i></button></div><div id="searchResults"></div></div></div>
+
+<div class="city-hero" id="cityHero">
+  <div class="city-hero-bg" id="cityHeroBg"></div>
+  <div class="city-hero-overlay"></div>
+  <div class="container">
+    <div class="city-hero-content">
+      <div class="breadcrumb">
+        <a href="index.html" class="breadcrumb-item" style="color:rgba(255,255,255,0.6)">الرئيسية</a>
+        <span class="breadcrumb-separator"><i class="fas fa-chevron-left"></i></span>
+        <a href="industrial-cities.html" class="breadcrumb-item" style="color:rgba(255,255,255,0.6)">المدن الصناعية</a>
+        <span class="breadcrumb-separator"><i class="fas fa-chevron-left"></i></span>
+        <span class="breadcrumb-item" style="color:var(--gold)" id="cityHeroName">...</span>
+      </div>
+      <div style="margin-top:16px">
+        <span style="background:rgba(212,175,55,0.2);color:var(--gold);padding:5px 16px;border-radius:100px;font-size:0.82rem;font-weight:600" id="cityHeroRegion"></span>
+      </div>
+      <h1 style="color:white;font-size:clamp(2rem,5vw,3.5rem);margin:16px 0;font-weight:900" id="cityHeroNameTitle"></h1>
+      <div style="display:flex;gap:32px;flex-wrap:wrap">
+        <div style="text-align:center">
+          <div style="font-size:1.8rem;font-weight:900;color:var(--gold)" id="cityHeroFactories">-</div>
+          <div style="color:rgba(255,255,255,0.7);font-size:0.82rem">منشأة صناعية</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:1.8rem;font-weight:900;color:var(--gold)" id="cityHeroWorkers">-</div>
+          <div style="color:rgba(255,255,255,0.7);font-size:0.82rem">عامل وموظف</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:1.8rem;font-weight:900;color:var(--gold)" id="cityHeroEstablished">-</div>
+          <div style="color:rgba(255,255,255,0.7);font-size:0.82rem">سنة التأسيس</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div class="city-details-layout">
+      <div class="city-main-content">
+        <div class="city-stats-grid reveal mb-32" id="cityStats"></div>
+
+        <div class="content-section reveal">
+          <h3><i class="fas fa-info-circle"></i> نبذة عن المدينة</h3>
+          <p id="cityDescription" style="line-height:1.9;font-size:1rem"></p>
+        </div>
+
+        <div class="content-section reveal">
+          <h3><i class="fas fa-industry"></i> الصناعات الرئيسية</h3>
+          <div id="cityIndustries" class="tags" style="gap:10px"></div>
+        </div>
+
+        <div class="content-section reveal">
+          <h3><i class="fas fa-concierge-bell"></i> الخدمات والتسهيلات</h3>
+          <div id="cityServices" class="feature-list"></div>
+        </div>
+
+        <div class="content-section reveal" style="background:linear-gradient(135deg,rgba(44,62,80,0.03),rgba(212,175,55,0.04));border-color:rgba(212,175,55,0.2)">
+          <h3><i class="fas fa-star"></i> دور المدينة في رؤية 2030</h3>
+          <p id="cityVision" style="line-height:1.9;font-size:1rem"></p>
+        </div>
+
+        <div class="content-section reveal">
+          <h3><i class="fas fa-handshake"></i> مزايا الاستثمار</h3>
+          <div id="cityInvestment" class="feature-list"></div>
+        </div>
+      </div>
+
+      <div class="city-sidebar">
+        <div class="sidebar-card">
+          <h4><i class="fas fa-info"></i> معلومات المدينة</h4>
+          <div id="cityInfoRows">
+            <div class="info-row"><span class="label">المنطقة</span><span class="value" id="sidebarRegion">-</span></div>
+            <div class="info-row"><span class="label">سنة التأسيس</span><span class="value" id="sidebarEstablished">-</span></div>
+            <div class="info-row"><span class="label">المساحة</span><span class="value" id="sidebarArea">-</span></div>
+            <div class="info-row"><span class="label">عدد المنشآت</span><span class="value" id="sidebarFactories">-</span></div>
+            <div class="info-row"><span class="label">عدد العمال</span><span class="value" id="sidebarWorkers">-</span></div>
+            <div class="info-row"><span class="label">نسبة التوطين</span><span class="value" id="sidebarEmployment">-</span></div>
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <h4><i class="fas fa-chart-bar"></i> المؤشرات الاقتصادية</h4>
+          <div class="info-row"><span class="label">الإنتاج السنوي</span><span class="value" id="sidebarProduction">-</span></div>
+          <div class="info-row"><span class="label">نسبة التصدير</span><span class="value" id="sidebarExport">-</span></div>
+          <div class="info-row"><span class="label">المحتوى المحلي</span><span class="value" id="sidebarLocal">-</span></div>
+          <div class="info-row"><span class="label">مساهمة الناتج المحلي</span><span class="value" id="sidebarGdp">-</span></div>
+        </div>
+
+        <div class="sidebar-card">
+          <h4><i class="fas fa-map-marker-alt"></i> الموقع الجغرافي</h4>
+          <div style="background:var(--off-white);border-radius:var(--radius-md);padding:16px;text-align:center;margin-bottom:16px">
+            <i class="fas fa-map-marked-alt" style="font-size:2rem;color:var(--gold);margin-bottom:8px;display:block"></i>
+            <p id="sidebarCoords" style="font-size:0.85rem;color:var(--text-light)"></p>
+          </div>
+          <a href="industrial-map.html" class="btn btn-dark w-full" style="justify-content:center">
+            <i class="fas fa-map"></i> عرض على الخريطة
+          </a>
+        </div>
+
+        <div class="sidebar-card" style="background:var(--primary)">
+          <h4 style="color:white;border-color:rgba(255,255,255,0.15)"><i class="fas fa-handshake"></i> هل تريد الاستثمار؟</h4>
+          <p style="color:rgba(255,255,255,0.7);font-size:0.88rem;margin-bottom:16px">تواصل معنا للحصول على معلومات تفصيلية حول فرص الاستثمار في هذه المدينة</p>
+          <a href="contact.html" class="btn btn-primary w-full" style="justify-content:center">
+            <i class="fas fa-envelope"></i> تواصل معنا
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--light-bg)">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">مدن صناعية أخرى</h2>
+      <div class="title-line"></div>
+    </div>
+    <div class="grid-3" id="relatedCities"></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="site-logo">
+          <div class="logo-icon"><i class="fas fa-industry"></i></div>
+          <div class="logo-text">
+            <span class="title">منصة المدن الصناعية</span>
+            <span class="subtitle">المملكة العربية السعودية</span>
+          </div>
+        </a>
+        <p class="footer-desc">منصة متكاملة تجمع المعلومات والبيانات عن المدن الصناعية في المملكة العربية السعودية، وتدعم المستثمرين في اتخاذ قراراتهم الاستثمارية.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-youtube"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>المدن الصناعية</h4>
+        <div class="footer-links">
+          <a href="industrial-cities.html" class="footer-link"><i class="fas fa-chevron-left"></i> جميع المدن</a>
+          <a href="city-details.html?id=jubail" class="footer-link"><i class="fas fa-chevron-left"></i> الجبيل الصناعية</a>
+          <a href="city-details.html?id=yanbu" class="footer-link"><i class="fas fa-chevron-left"></i> ينبع الصناعية</a>
+          <a href="city-details.html?id=jeddah" class="footer-link"><i class="fas fa-chevron-left"></i> جدة الصناعية</a>
+          <a href="city-details.html?id=riyadh" class="footer-link"><i class="fas fa-chevron-left"></i> الرياض الصناعية</a>
+          <a href="industrial-map.html" class="footer-link"><i class="fas fa-chevron-left"></i> الخريطة التفاعلية</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>الاستثمار</h4>
+        <div class="footer-links">
+          <a href="investment-opportunities.html" class="footer-link"><i class="fas fa-chevron-left"></i> فرص الاستثمار</a>
+          <a href="industries.html" class="footer-link"><i class="fas fa-chevron-left"></i> القطاعات الصناعية</a>
+          <a href="vision-2030.html" class="footer-link"><i class="fas fa-chevron-left"></i> رؤية 2030</a>
+          <a href="economic-statistics.html" class="footer-link"><i class="fas fa-chevron-left"></i> الإحصاءات</a>
+          <a href="find-your-city.html" class="footer-link"><i class="fas fa-chevron-left"></i> ابحث عن مدينتك</a>
+          <a href="compare-cities.html" class="footer-link"><i class="fas fa-chevron-left"></i> مقارنة المدن</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>المنصة</h4>
+        <div class="footer-links">
+          <a href="about-platform.html" class="footer-link"><i class="fas fa-chevron-left"></i> عن المنصة</a>
+          <a href="industrial-timeline.html" class="footer-link"><i class="fas fa-chevron-left"></i> الجدول الزمني</a>
+          <a href="contact.html" class="footer-link"><i class="fas fa-chevron-left"></i> تواصل معنا</a>
+        </div>
+        <div style="margin-top:24px;padding:16px;background:rgba(212,175,55,0.1);border-radius:10px;border:1px solid rgba(212,175,55,0.2)">
+          <div style="color:var(--gold);font-weight:700;margin-bottom:8px;font-size:0.9rem"><i class="fas fa-phone-alt"></i> للاستفسار</div>
+          <div style="color:rgba(255,255,255,0.7);font-size:0.85rem">920000000</div>
+          <div style="color:rgba(255,255,255,0.7);font-size:0.85rem;margin-top:4px">info@industrial-sa.gov.sa</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>جميع الحقوق محفوظة 2026 - منصة المدن الصناعية في المملكة العربية السعودية</p>
+      <div class="footer-bottom-links">
+        <a href="#">سياسة الخصوصية</a>
+        <a href="#">شروط الاستخدام</a>
+        <a href="#">إخلاء المسؤولية</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></button>
+
+<script src="cities.js"></script>
+<script src="main.js"></script>
+<script src="city-details.js"></script>
+<script>
+(function() {
+  const cityId = new URLSearchParams(window.location.search).get('id') || 'jubail';
+  const city = CITIES_DATA.find(c => c.id === cityId);
+  if (!city) return;
+
+  document.title = city.name + ' - منصة المدن الصناعية';
+
+  const heroBg = document.getElementById('cityHeroBg');
+  if (heroBg) heroBg.style.backgroundImage = `url(${city.heroImage})`;
+
+  const nameTitle = document.getElementById('cityHeroNameTitle');
+  if (nameTitle) nameTitle.textContent = city.name;
+
+  document.getElementById('cityHeroName').textContent = city.name;
+  document.getElementById('cityHeroRegion').textContent = city.region;
+  document.getElementById('cityHeroEstablished').textContent = city.established;
+  document.getElementById('cityHeroFactories').textContent = city.factories.toLocaleString('ar-SA');
+  document.getElementById('cityHeroWorkers').textContent = city.workers.toLocaleString('ar-SA');
+
+  document.getElementById('sidebarRegion').textContent = city.region;
+  document.getElementById('sidebarEstablished').textContent = city.established;
+  document.getElementById('sidebarArea').textContent = city.area.toLocaleString('ar-SA') + ' ' + city.areaUnit;
+  document.getElementById('sidebarFactories').textContent = city.factories.toLocaleString('ar-SA');
+  document.getElementById('sidebarWorkers').textContent = city.workers.toLocaleString('ar-SA');
+  document.getElementById('sidebarEmployment').textContent = city.saudiEmployment + '%';
+  document.getElementById('sidebarProduction').textContent = city.stats.annualProduction;
+  document.getElementById('sidebarExport').textContent = city.stats.exportPercentage;
+  document.getElementById('sidebarLocal').textContent = city.stats.localContent;
+  document.getElementById('sidebarGdp').textContent = city.gdpContribution + '%';
+  document.getElementById('sidebarCoords').textContent = `خط العرض: ${city.coordinates.lat} | خط الطول: ${city.coordinates.lng}`;
+})();
+</script>
+</body>
+</html>
